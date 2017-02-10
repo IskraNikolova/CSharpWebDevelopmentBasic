@@ -1,0 +1,6 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\BrowseCake\bin\Debug\BrowseCake.exe.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\BrowseCake\bin\Debug\BrowseCake.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\BrowseCake\bin\Debug\BrowseCake.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\BrowseCake\obj\Debug\BrowseCake.csprojResolveAssemblyReference.cache
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\BrowseCake\obj\Debug\BrowseCake.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\BrowseCake\obj\Debug\BrowseCake.pdb

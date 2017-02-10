@@ -1,0 +1,6 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\ByTheCake\bin\Debug\ByTheCake.exe.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\ByTheCake\bin\Debug\ByTheCake.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\ByTheCake\bin\Debug\ByTheCake.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\ByTheCake\obj\Debug\ByTheCake.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\ByTheCake\obj\Debug\ByTheCake.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\ByTheCake\obj\Debug\ByTheCake.csprojResolveAssemblyReference.cache

@@ -1,0 +1,5 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\AboutUs\bin\Debug\AboutUs.exe.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\AboutUs\bin\Debug\AboutUs.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\AboutUs\bin\Debug\AboutUs.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\AboutUs\obj\Debug\AboutUs.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\02. CSharp-Web-Dev-Basics-HTTP-Protocol\AboutUs\obj\Debug\AboutUs.pdb
