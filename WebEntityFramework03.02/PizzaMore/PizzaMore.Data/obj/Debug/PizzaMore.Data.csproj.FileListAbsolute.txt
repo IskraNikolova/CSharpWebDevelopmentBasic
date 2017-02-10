@@ -1,0 +1,10 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\PizzaMore.Data.dll.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\PizzaMore.Data.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\PizzaMore.Data.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\EntityFramework.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\EntityFramework.xml
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\obj\Debug\PizzaMore.Data.csprojResolveAssemblyReference.cache
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\obj\Debug\PizzaMore.Data.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\PizzaMore.Data\obj\Debug\PizzaMore.Data.pdb

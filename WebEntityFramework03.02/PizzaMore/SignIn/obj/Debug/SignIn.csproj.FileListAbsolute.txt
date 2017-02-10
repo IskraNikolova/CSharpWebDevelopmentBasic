@@ -1,0 +1,14 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\SignIn.exe.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\SignIn.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\SignIn.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\EntityFramework.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\EntityFramework.SqlServer.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\PizzaMore.Data.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\PizzaMore.Utility.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\PizzaMore.Data.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\PizzaMore.Utility.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\EntityFramework.xml
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\bin\Debug\EntityFramework.SqlServer.xml
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\obj\Debug\SignIn.csprojResolveAssemblyReference.cache
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\obj\Debug\SignIn.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\PizzaMore\SignIn\obj\Debug\SignIn.pdb
