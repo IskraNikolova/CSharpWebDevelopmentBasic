@@ -1,0 +1,21 @@
+
+form{
+    width: 280px;
+    height: 170px;
+    background-color: lightgrey;
+    padding: 10px;
+    margin: 10px;
+}
+
+input{
+    padding: 3px;
+    margin-top: 6px;
+    margin-left: 5px;
+}
+
+select{
+    margin: 5px;
+    padding: 3px;
+    width: 170px;
+}
+
