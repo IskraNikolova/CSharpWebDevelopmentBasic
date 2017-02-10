@@ -39,6 +39,7 @@
                             ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/css/bootstrap.min.css")
                         };
 
+                        response.Header.ContentType = "text/css";
                         return response;
                     }
                 },
@@ -54,6 +55,7 @@
                             StatusCode = ResponseStatusCode.Ok,
                             ContentAsUTF8 = File.ReadAllText("../../content/css/carousel.css")
                         };
+
                         response.Header.ContentType = "stylesheet";
                         return response;
                     }
@@ -71,6 +73,7 @@
                             ContentAsUTF8 = File.ReadAllText("../../content/jquery/jquery-3.1.1.js")
                         };
 
+                        response.Header.ContentType = "application/x-javascript";
                         return response;
                     }
                 },
