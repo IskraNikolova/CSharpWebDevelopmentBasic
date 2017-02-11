@@ -56,10 +56,6 @@
             {
                 header.AppendLine($"{other.Key}: {other.Value}");
             }
-
-            header.AppendLine();
-            header.AppendLine();
-
             return header.ToString();
         }
     }

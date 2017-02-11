@@ -56,7 +56,7 @@
                             ContentAsUTF8 = File.ReadAllText("../../content/css/carousel.css")
                         };
 
-                        response.Header.ContentType = "stylesheet";
+                        response.Header.ContentType = "text/css";
                         return response;
                     }
                 },
@@ -91,6 +91,23 @@
                         };
 
                         response.Header.ContentType = "application/x-javascript";
+                        return response;
+                    }
+                },
+                new Route()
+                {
+                    Name = "HomeImage",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"^/images/home1.png$",
+                    Callable = (request) =>
+                    {
+                        var response = new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.Ok,
+                            Content =  File.ReadAllBytes("../../content/images/home1.png")
+                        };
+
+                        response.Header.ContentType = "image/png";
                         return response;
                     }
                 }

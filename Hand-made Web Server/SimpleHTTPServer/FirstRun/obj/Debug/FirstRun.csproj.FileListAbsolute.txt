@@ -6,3 +6,11 @@ E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\Simple
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\SimpleHTTPServer\FirstRun\obj\Debug\FirstRun.csprojResolveAssemblyReference.cache
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\SimpleHTTPServer\FirstRun\obj\Debug\FirstRun.exe
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\WebEntityFramework03.02\SimpleHTTPServer\FirstRun\obj\Debug\FirstRun.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\bin\Debug\FirstRun.exe.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\bin\Debug\FirstRun.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\bin\Debug\FirstRun.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\bin\Debug\SimpleHttpServer.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\bin\Debug\SimpleHttpServer.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\obj\Debug\FirstRun.csprojResolveAssemblyReference.cache
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\obj\Debug\FirstRun.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\FirstRun\obj\Debug\FirstRun.pdb

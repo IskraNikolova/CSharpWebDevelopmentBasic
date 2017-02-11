@@ -75,7 +75,8 @@
     <Content Include="content\bootstrap\js\npm.js" />
     <Content Include="content\css\carousel.css" />
     <Content Include="content\home.html" />
-    <Content Include="content\images\pizza_2.jpg" />
+    <Content Include="content\images\home.png" />
+    <Content Include="content\images\home1.png" />
     <Content Include="content\jquery\jquery-3.1.1.js" />
   </ItemGroup>
   <ItemGroup />
