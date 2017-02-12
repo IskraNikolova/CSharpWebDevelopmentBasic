@@ -1,10 +1,15 @@
-
-.navbar {
+#navbarHome {
     position:absolute;
     top:40px;
     width: 90%;
     margin-left: 5%;
 }
+
+#backToTop {
+    margin-left: 90%;
+}
+
 footer {
     padding-top: 5%;
 }
+

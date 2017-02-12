@@ -14,15 +14,16 @@
             {
                 new Route()
                 {
-                    Name = "Home Directory",
+                    Name = "Directories",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"^/home$",
+                    UrlRegex = @"^/.+\.html$",
                     Callable = (request) =>
-                    {
+                               {
+                        var nameOfFile = request.Url.Substring(1);
                         return new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.Ok,
-                            ContentAsUTF8 = File.ReadAllText("../../content/home.html")
+                            ContentAsUTF8 = File.ReadAllText($"../../content/{nameOfFile}")
                         };
                     }
                 },
@@ -96,18 +97,37 @@
                 },
                 new Route()
                 {
-                    Name = "HomeImage",
+                    Name = "PngImages",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"^/images/home1.png$",
+                    UrlRegex = @"^/images/.+\.png$",
                     Callable = (request) =>
-                    {
+                               {
+                        var nameOfFile = request.Url.Substring(request.Url.LastIndexOf('/'));
                         var response = new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.Ok,
-                            Content =  File.ReadAllBytes("../../content/images/home1.png")
+                            Content =  File.ReadAllBytes($"../../content/images/{nameOfFile}")
                         };
 
                         response.Header.ContentType = "image/png";
+                        return response;
+                    }
+                },
+                new Route()
+                {
+                    Name = "JpgImages",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"^/images/.+\.jpg$",
+                    Callable = (request) =>
+                               {
+                        var nameOfFile = request.Url.Substring(request.Url.LastIndexOf('/'));
+                        var response = new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.Ok,
+                            Content =  File.ReadAllBytes($"../../content/images/{nameOfFile}")
+                        };
+
+                        response.Header.ContentType = "image/jpeg";
                         return response;
                     }
                 }
