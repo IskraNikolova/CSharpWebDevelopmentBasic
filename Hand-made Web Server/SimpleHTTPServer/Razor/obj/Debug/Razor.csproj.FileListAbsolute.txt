@@ -1,0 +1,12 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\Razor.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\Razor.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\obj\Debug\Razor.csprojResolveAssemblyReference.cache
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\obj\Debug\Razor.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\obj\Debug\Razor.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\Razor.dll.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\EntityFramework.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\EntityFramework.SqlServer.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\SharpStore.Data.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\SharpStore.Data.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\EntityFramework.xml
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\Razor\bin\Debug\EntityFramework.SqlServer.xml
