@@ -19,7 +19,7 @@
                 {
                     Name = "ContactsGET",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"^/contacts$",
+                    UrlRegex = @"^/contacts.html$",
                     Callable = (request) =>
                         {
                         return new HttpResponse()
@@ -33,7 +33,7 @@
                 {
                     Name = "ContactsPost",
                     Method = RequestMethod.POST,
-                    UrlRegex = @"^/contacts$",
+                    UrlRegex = @"^/contacts.html$",
                     Callable = (request) =>
                         {
                         var queryString = request.Content;
@@ -51,7 +51,7 @@
                 {
                     Name = "Home Directories",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"^/home$",
+                    UrlRegex = @"^/home.html$",
                     Callable = (request) =>
                         {
                         return new HttpResponse()
@@ -63,9 +63,23 @@
                 },
                  new Route()
                 {
+                    Name = "About Directories",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"^/about.html$",
+                    Callable = (request) =>
+                        {
+                        return new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.Ok,
+                            ContentAsUTF8 = new AboutPage().ToString()
+                        };
+                    }
+                },
+                 new Route()
+                {
                     Name = "Products Directories",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"^/products$",
+                    UrlRegex = @"^/products.html$",
                     Callable = (request) =>
                         {
                         var products = Data.Data.Context.Knives.ToList();
@@ -76,6 +90,21 @@
                         };
                     }
                 },
+               //new Route()
+               //{
+               //      Name = "Directories",
+               //      Method = RequestMethod.GET,
+               //      UrlRegex = @"^/.+\.html$",
+               //      Callable = (request) =>
+               //     {
+               //         var nameOfFile = request.Url.Substring(1);
+               //         return new HttpResponse()
+               //     {
+               //         StatusCode = ResponseStatusCode.Ok,
+               //         ContentAsUTF8 = File.ReadAllText($"../../content/{nameOfFile}")
+               //     };
+               //    }
+               //  },
                 new Route()
                 {
                     Name = "Bootstrap CSS",

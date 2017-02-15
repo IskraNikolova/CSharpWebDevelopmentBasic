@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutPage.cs" />
     <Compile Include="ContactPage.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="Page.cs" />

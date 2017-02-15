@@ -13,12 +13,12 @@
         <nav class="navbar navbar-inverse" id="navbar1">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Sharp Store</a>
+                    <a class="navbar-brand" href="home.html">Sharp Store</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contacts</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Theme
@@ -33,26 +33,30 @@
                 </ul>
             </div>
         </nav>
-        <form method="POST">
-            <label><strong>Your Email</strong></label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="email" placeholder="Enter your email..">
-                <span class="input-group-addon" id="basic-addon2">*</span>
-            </div><!-- /input-group -->
-            <br />
-            <label><strong>Subject</strong></label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="subject" placeholder="Enter subject..">
-                <span class="input-group-addon" id="basic-addon2">*</span>
-            </div><!-- /input-group -->
-            <br />
-            <div class="input-group">
-                <label><strong>Message</strong></label>
-                <textarea class="form-control" cows="5" name="message-text" placeholder="Enter your text..."></textarea>
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+                <form method="POST">
+                    <label><strong>Your Email</strong></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="email" placeholder="Enter your email..">
+                        <span class="input-group-addon" id="basic-addon2">*</span>
+                    </div><!-- /input-group -->
+                    <br />
+                    <label><strong>Subject</strong></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="subject" placeholder="Enter subject..">
+                        <span class="input-group-addon" id="basic-addon2">*</span>
+                    </div><!-- /input-group -->
+                    <br />
+                    <div class="input-group">
+                        <label><strong>Message</strong></label>
+                        <textarea class="form-control" cols="55" rows ="10" name="message-text" placeholder="Enter your text..."></textarea>
+                    </div>
+                    <br />
+                    <input type="submit" class="btn btn-primary" value="Send" />
+                </form>
             </div>
-            <br />
-            <input type="submit" class="btn btn-primary" value="Send" />
-        </form>
+        </div>
         <footer>
             <p>
                 &copy; Sharp Store Inc
