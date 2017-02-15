@@ -7,7 +7,14 @@
 
     public class ProductsPage : Page
     {
+        private const string Path = "../../content/products.html";
         private readonly IList<Knife> knives;
+
+        public ProductsPage(IList<Knife> knives) 
+            :this(Path, knives)
+        {
+            
+        }
 
         public ProductsPage(string htmlPath, IList<Knife> knives) 
             : base(htmlPath)

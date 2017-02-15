@@ -16,3 +16,5 @@ E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTT
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\AddKnife\obj\Debug\AddKnife.pdb
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\AddKnife\bin\Debug\Razor.dll
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\AddKnife\bin\Debug\Razor.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\AddKnife\bin\Debug\SharpStoreServices.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\AddKnife\bin\Debug\SharpStoreServices.pdb

@@ -25,7 +25,7 @@
             httpRequest.AppendLine(this.Header.ToString());
             if (this.Content != null)
             {
-                httpRequest.AppendLine(this.Content);
+                httpRequest.Append(this.Content);
             }
 
             return httpRequest.ToString();

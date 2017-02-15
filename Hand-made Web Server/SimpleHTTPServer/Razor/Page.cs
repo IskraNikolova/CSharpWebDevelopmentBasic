@@ -1,15 +1,14 @@
 ﻿namespace Razor
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Text;
 
-    public class Page
+    public abstract class Page
     {
-        private StringBuilder htmlContent;
+        private readonly StringBuilder htmlContent;
 
-        public Page(string htmlPath)
+        protected Page(string htmlPath)
         {
             this.htmlContent = new StringBuilder(File.ReadAllText(htmlPath));
         }

@@ -1,5 +1,6 @@
 ﻿namespace SimpleHttpServer.Models
 {
+    using System;
     using System.Text;
     using Enums;
 
@@ -12,6 +13,14 @@
         }
 
         public ResponseStatusCode StatusCode { get; set; }
+
+        public string StatusMessage
+        {
+            get
+            {
+                return Enum.GetName(typeof(ResponseStatusCode), this.StatusCode);
+            }
+        }
 
         public Header Header { get; set; }
 
@@ -28,7 +37,7 @@
         public override string ToString()
         {
             StringBuilder httpResponse = new StringBuilder();
-            httpResponse.AppendLine($"HTTP/1.0 {(int)this.StatusCode} {this.StatusCode}");
+            httpResponse.AppendLine($"HTTP/1.0 {(int)this.StatusCode} {this.StatusMessage}");
             httpResponse.AppendLine(this.Header.ToString());
 
             return httpResponse.ToString();

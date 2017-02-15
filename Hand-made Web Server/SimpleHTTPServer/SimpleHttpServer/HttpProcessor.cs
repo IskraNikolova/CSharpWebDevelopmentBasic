@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Net.Sockets;
     using System.Text;
@@ -11,7 +12,7 @@
 
     public class HttpProcessor
     {
-        private readonly IList<Route> Routes;
+        private IList<Route> Routes;
         private HttpRequest Request;
         private HttpResponse Response;
 
@@ -30,55 +31,25 @@
             }
         }
 
-        private HttpResponse RouteRequest()
+        private HttpRequest GetRequest(Stream inputStream)
         {
-            var routes = this.Routes
-                             .Where(x => Regex.Match(this.Request.Url, x.UrlRegex).Success)
-                             .ToList();
-            if (!routes.Any())
-            {
-                return HttpResponseBuilder.NotFound();
-            }
-
-            var route = routes.SingleOrDefault(x => x.Method == this.Request.Method);
-            if (route == null)
-            {
-                return new HttpResponse()
-                {
-                    StatusCode = ResponseStatusCode.MethodNotAllowed
-                };
-            }
-
-            try
-            {
-                return route.Callable(this.Request);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return HttpResponseBuilder.InternalServerError();
-            }
-        }
-
-        private HttpRequest GetRequest(NetworkStream stream)
-        {
-            string requestLine = StreamUtils.ReadLine(stream);
-            string[] tokens = requestLine.Split();
+            //Read Request Line
+            string requestLine = StreamUtils.ReadLine(inputStream);
+            string[] tokens = requestLine.Split(' ');
             if (tokens.Length != 3)
             {
-                throw new Exception("Invalid http request line!");
+                throw new Exception("invalid http request line");
             }
-
-            RequestMethod method = (RequestMethod) Enum.Parse(typeof(RequestMethod), tokens[0].ToUpper());
+            RequestMethod method = (RequestMethod)Enum.Parse(typeof(RequestMethod), tokens[0].ToUpper());
             string url = tokens[1];
             string protocolVersion = tokens[2];
 
+            //Read Headers
             Header header = new Header(HeaderType.HttpRequest);
             string line;
-            while ((line = StreamUtils.ReadLine(stream)) != null)
+            while ((line = StreamUtils.ReadLine(inputStream)) != null)
             {
-                if (line == string.Empty)
+                if (line.Equals(""))
                 {
                     break;
                 }
@@ -86,12 +57,11 @@
                 int separator = line.IndexOf(':');
                 if (separator == -1)
                 {
-                    throw new Exception($"Invalid http header line: {line}");
+                    throw new Exception("invalid http header line: " + line);
                 }
-
                 string name = line.Substring(0, separator);
                 int pos = separator + 1;
-                while (pos < line.Length && line[pos] == ' ')
+                while ((pos < line.Length) && (line[pos] == ' '))
                 {
                     pos++;
                 }
@@ -100,7 +70,6 @@
                 if (name == "Cookie")
                 {
                     string[] cookieSaves = value.Split(';');
-
                     foreach (var cookieSave in cookieSaves)
                     {
                         string[] cookiePair = cookieSave.Split('=').Select(x => x.Trim()).ToArray();
@@ -108,7 +77,7 @@
                         header.AddCookie(cookie);
                     }
                 }
-                else if(name == "Content-Length")
+                else if (name == "Content-Length")
                 {
                     header.ContentLength = value;
                 }
@@ -121,15 +90,15 @@
             string content = null;
             if (header.ContentLength != null)
             {
-                int tottalBytes = Convert.ToInt32(header.ContentLength);
-                int bytesLeft = tottalBytes;
-                byte[] bytes = new byte[tottalBytes];
+                int totalBytes = Convert.ToInt32(header.ContentLength);
+                int bytesLeft = totalBytes;
+                byte[] bytes = new byte[totalBytes];
 
                 while (bytesLeft > 0)
                 {
                     byte[] buffer = new byte[bytesLeft > 1024 ? 1024 : bytesLeft];
-                    int n = stream.Read(buffer, 0, buffer.Length);
-                    buffer.CopyTo(bytes, tottalBytes - bytesLeft);
+                    int n = inputStream.Read(buffer, 0, buffer.Length);
+                    buffer.CopyTo(bytes, totalBytes - bytesLeft);
 
                     bytesLeft -= n;
                 }
@@ -144,12 +113,55 @@
                 Header = header,
                 Content = content
             };
-
-            Console.WriteLine("-REQUEST---------------------");
+            Console.WriteLine("-REQUEST-----------------------------");
             Console.WriteLine(request);
-            Console.WriteLine("-----------------------------");
+            Console.WriteLine("------------------------------");
 
             return request;
+        }
+        private HttpResponse RouteRequest()
+        {
+            var routes = this.Routes
+                .Where(x => Regex.Match(Request.Url, x.UrlRegex).Success)
+                .ToList();
+
+            if (!routes.Any())
+                return HttpResponseBuilder.NotFound();
+
+            var route = routes.SingleOrDefault(x => x.Method == Request.Method);
+
+            if (route == null)
+                return new HttpResponse()
+                {
+                    StatusCode = ResponseStatusCode.MethodNotAllowed
+                };
+
+            #region FIleSystemHandler
+            // extract the path if there is one
+            //var match = Regex.Match(request.Url, route.UrlRegex);
+            //if (match.Groups.Count > 1)
+            //{
+            //    request.Path = match.Groups[1].Value;
+            //}
+            //else
+            //{
+            //    request.Path = request.Url;
+            //}
+            #endregion
+
+
+            // trigger the route handler...
+            try
+            {
+                return route.Callable(this.Request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                return HttpResponseBuilder.InternalServerError();
+            }
+
         }
     }
 }

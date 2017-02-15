@@ -3,19 +3,50 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using Data.Models;
     using Razor;
+    using SharpStoreServices;
     using SimpleHttpServer.Enums;
     using SimpleHttpServer.Models;
+    using SimpleHttpServer.Utilities;
 
     public static class RoutesConfig
     {
-        private static IList<Knife> knives = Data.Data.Context.Knives.ToList();
-
         public static IList<Route> GetRoutes()
         {
             var routes = new List<Route>()
             {
+                new Route()
+                {
+                    Name = "ContactsGET",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"^/contacts$",
+                    Callable = (request) =>
+                        {
+                        return new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.Ok,
+                            ContentAsUTF8 = new ContactPage().ToString()
+                        };
+                    }
+                },
+                new Route()
+                {
+                    Name = "ContactsPost",
+                    Method = RequestMethod.POST,
+                    UrlRegex = @"^/contacts$",
+                    Callable = (request) =>
+                        {
+                        var queryString = request.Content;
+                        IDictionary<string, string> variables = QueryStringParser.Parser(queryString);
+                        var service = new MessagesService();
+                        service.AddMessageFromPostVariables(variables);
+                        return new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.Ok,
+                            ContentAsUTF8 = new ContactPage().ToString()
+                        };
+                    }
+                },
                 new Route()
                 {
                     Name = "Home Directories",
@@ -41,22 +72,7 @@
                         return new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.Ok,
-                            ContentAsUTF8 = new ProductsPage("../../content/products.html", knives).ToString()
-                        };
-                    }
-                },
-                new Route()
-                {
-                    Name = "Directories",
-                    Method = RequestMethod.GET,
-                    UrlRegex = @"^/.+\.html$",
-                    Callable = (request) =>
-                               {
-                        var nameOfFile = request.Url.Substring(1);
-                        return new HttpResponse()
-                        {
-                            StatusCode = ResponseStatusCode.Ok,
-                            ContentAsUTF8 = File.ReadAllText($"../../content/{nameOfFile}")
+                            ContentAsUTF8 = new ProductsPage(products).ToString()
                         };
                     }
                 },

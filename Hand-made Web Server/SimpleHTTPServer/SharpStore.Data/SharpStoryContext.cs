@@ -1,8 +1,6 @@
 namespace SharpStore.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
     using Migrations;
     using Models;
 
@@ -15,5 +13,7 @@ namespace SharpStore.Data
         }
 
         public virtual DbSet<Knife> Knives { get; set; }
+
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }
