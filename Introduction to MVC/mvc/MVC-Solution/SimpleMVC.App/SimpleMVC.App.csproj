@@ -33,8 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,32 +55,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart.cs" />
-    <Compile Include="Mvc\Controllers\Controller.cs" />
-    <Compile Include="Mvc\Attributes\Methods\HttpGetAttributes.cs" />
-    <Compile Include="Mvc\Attributes\Methods\HttpMethodAttribute.cs" />
-    <Compile Include="Mvc\Attributes\Methods\HttpPostAttributes.cs" />
-    <Compile Include="Mvc\Extensions\StringExtentions.cs" />
-    <Compile Include="Mvc\Interfaces\Generic\IActionResult.cs" />
-    <Compile Include="Mvc\Interfaces\Generic\IRenderable.cs" />
-    <Compile Include="Mvc\Interfaces\IActionResult.cs" />
-    <Compile Include="Mvc\Interfaces\IHandleable .cs" />
-    <Compile Include="Mvc\Interfaces\IInvocable.cs" />
-    <Compile Include="Mvc\Interfaces\IRenderable.cs" />
-    <Compile Include="Mvc\MvcContext.cs" />
-    <Compile Include="Mvc\MvcEngine.cs" />
-    <Compile Include="Mvc\Routes\ControllerRouter.cs" />
-    <Compile Include="Mvc\ViewEngine\ActionResult.cs" />
-    <Compile Include="Mvc\ViewEngine\Generic\ActionResult.cs" />
+    <Compile Include="BindingModels\RegisterUserBindingModel.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Data\NotesAppContext.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="MVC\Attributes\Methods\HttpGetAttribute.cs" />
+    <Compile Include="MVC\Attributes\Methods\HttpMethodAttribute.cs" />
+    <Compile Include="MVC\Attributes\Methods\HttpPostAttribute.cs" />
+    <Compile Include="MVC\Controllers\Controller.cs" />
+    <Compile Include="MVC\Extensions\StringExtensions.cs" />
+    <Compile Include="MVC\Interfaces\Generic\IActionResult.cs" />
+    <Compile Include="MVC\Interfaces\Generic\IRenderable.cs" />
+    <Compile Include="MVC\Interfaces\IActionResult.cs" />
+    <Compile Include="MVC\Interfaces\IHandleable.cs" />
+    <Compile Include="MVC\Interfaces\IInvocable.cs" />
+    <Compile Include="MVC\Interfaces\IRenderable.cs" />
+    <Compile Include="MVC\MvcContext.cs" />
+    <Compile Include="MVC\MvcEngine.cs" />
+    <Compile Include="MVC\Routers\ControllerRouter.cs" />
+    <Compile Include="MVC\ViewEngine\ActionResult.cs" />
+    <Compile Include="MVC\ViewEngine\Generic\ActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteTable.cs" />
+    <Compile Include="BindingModels\AddNoteBindingModel.cs" />
+    <Compile Include="ViewModels\AllUsernameViewModel.cs" />
+    <Compile Include="ViewModels\NoteViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\Home\Index.cs" />
+    <Compile Include="Views\Users\All.cs" />
+    <Compile Include="Views\Users\Profile.cs" />
+    <Compile Include="Views\Users\Register.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleHttpServer\SimpleHttpServer.csproj">
@@ -77,6 +99,7 @@
       <Name>SimpleHttpServer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

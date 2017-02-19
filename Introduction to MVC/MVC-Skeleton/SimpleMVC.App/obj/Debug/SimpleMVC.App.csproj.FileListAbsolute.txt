@@ -1,0 +1,10 @@
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleMVC.App.exe.config
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleMVC.App.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleMVC.App.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\obj\Debug\SimpleMVC.App.csprojResolveAssemblyReference.cache
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\obj\Debug\SimpleMVC.App.exe
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\obj\Debug\SimpleMVC.App.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\Resources\Pages\404.html
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\Resources\Pages\500.html
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleHttpServer.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleHttpServer.pdb

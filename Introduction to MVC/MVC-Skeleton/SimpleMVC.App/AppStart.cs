@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleMVC.App
+﻿namespace SimpleMVC.App
 {
-    class AppStart
+    using Mvc;
+    using SimpleHttpServer;
+
+    public class AppStart
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            HttpServer server = new HttpServer(8081, RouteTable.Routes);
+            MvcEngine.Run(server);
         }
     }
 }
