@@ -25,7 +25,7 @@
                 if (nextChar == -1)
                 {
                     Thread.Sleep(1);
-                    continue;
+                    break;
                 }
 
                 data.Append((char) nextChar);

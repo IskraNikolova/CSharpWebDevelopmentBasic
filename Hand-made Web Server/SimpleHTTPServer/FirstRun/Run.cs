@@ -18,7 +18,7 @@
                                    return new HttpResponse()
                                    {
                                        ContentAsUTF8 = "<h3>Hello :)</h3>",
-                                       StatusCode = ResponseStatusCode.Ok
+                                       StatusCode = ResponseStatusCode.OK
                                    };
                                }
                       }

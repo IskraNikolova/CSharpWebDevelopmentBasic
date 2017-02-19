@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Net.Sockets;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Text.RegularExpressions;
     using Enums;
@@ -27,6 +28,9 @@
             {
                 this.Request = this.GetRequest(stream);
                 this.Response = this.RouteRequest();
+                Console.WriteLine("-RESPONCE-----------");
+                Console.WriteLine(this.Response.Header);
+                Console.WriteLine("-------------------");
                 StreamUtils.WriteResponse(stream, this.Response);
             }
         }
@@ -128,7 +132,7 @@
             if (!routes.Any())
                 return HttpResponseBuilder.NotFound();
 
-            var route = routes.SingleOrDefault(x => x.Method == Request.Method);
+            var route = routes.FirstOrDefault(x => x.Method == Request.Method);
 
             if (route == null)
                 return new HttpResponse()

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AboutPage.cs" />
     <Compile Include="ContactPage.cs" />
+    <Compile Include="Cookies.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="ProductsPage.cs" />

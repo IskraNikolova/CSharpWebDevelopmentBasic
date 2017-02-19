@@ -56,7 +56,7 @@
         {
             string fileExtension = Path.GetExtension(localPath);
             var response = new HttpResponse();
-            response.StatusCode = ResponseStatusCode.Ok;
+            response.StatusCode = ResponseStatusCode.OK;
             response.Header.ContentType = QuickMimeTypeMapper.GetMimeType(fileExtension);
             response.Content = File.ReadAllBytes(localPath);
 
@@ -77,7 +77,7 @@
 
             return new HttpResponse()
             {
-                StatusCode = ResponseStatusCode.Ok
+                StatusCode = ResponseStatusCode.OK
             };
         }
     }

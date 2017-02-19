@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KnivesService.cs" />
     <Compile Include="MessagesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\SharpStore.Data\SharpStore.Data.csproj">
       <Project>{f4d61763-dbf0-4c44-85e6-df7cc185ef4b}</Project>
       <Name>SharpStore.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleHttpServer\SimpleHttpServer.csproj">
+      <Project>{88ba3b0a-54b8-404c-89cf-0004bdc80f4f}</Project>
+      <Name>SimpleHttpServer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

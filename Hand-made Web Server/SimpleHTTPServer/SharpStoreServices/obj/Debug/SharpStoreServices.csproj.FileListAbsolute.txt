@@ -10,3 +10,5 @@ E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTT
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\SharpStoreServices\bin\Debug\EntityFramework.SqlServer.xml
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\SharpStoreServices\obj\Debug\SharpStoreServices.dll
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\SharpStoreServices\obj\Debug\SharpStoreServices.pdb
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\SharpStoreServices\bin\Debug\SimpleHttpServer.dll
+E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Hand-made Web Server\SimpleHTTPServer\SharpStoreServices\bin\Debug\SimpleHttpServer.pdb

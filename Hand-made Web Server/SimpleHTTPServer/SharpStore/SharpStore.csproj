@@ -98,6 +98,8 @@
     <Content Include="content\bootstrap\js\npm.js" />
     <Content Include="content\contacts.html" />
     <Content Include="content\css\carousel.css" />
+    <Content Include="content\css\dark-nav.css" />
+    <Content Include="content\css\light-nav.css" />
     <Content Include="content\home.html" />
     <Content Include="content\images\home.png" />
     <Content Include="content\images\home1.png" />

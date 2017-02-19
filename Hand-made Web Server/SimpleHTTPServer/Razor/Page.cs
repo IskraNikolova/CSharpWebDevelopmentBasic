@@ -4,13 +4,14 @@
     using System.IO;
     using System.Text;
 
-    public abstract class Page
+    public class Page
     {
         private readonly StringBuilder htmlContent;
 
-        protected Page(string htmlPath)
+        public Page(string htmlPath)
         {
             this.htmlContent = new StringBuilder(File.ReadAllText(htmlPath));
+            
         }
 
         public void AddStyleByPath(string cssPath)
@@ -21,6 +22,14 @@
 
         public override string ToString()
         {
+            if (Cookies.cookies["theme"] == "dark")
+            {
+                this.AddStyleByPath("css/dark-nav.css");
+            }
+            else
+            {
+                this.AddStyleByPath("css/light-nav.css");
+            }
             return this.htmlContent.ToString();
         }
     }
