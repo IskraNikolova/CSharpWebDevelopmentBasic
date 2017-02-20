@@ -10,6 +10,7 @@
         public string Render()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<a href=\"/home/index\">-Home</a>");
             sb.AppendLine($"<h3>User {this.Model.Username}</3>");
             sb.AppendLine("<form action=\"profile\" method=\"POST\"></br>");
             sb.AppendLine("Title: <input type=\"text\" name=\"Title\"/></br>");

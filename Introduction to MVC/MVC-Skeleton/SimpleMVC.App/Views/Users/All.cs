@@ -12,11 +12,12 @@
         public string Render()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<h3>All User</h3>");
+            sb.AppendLine("<a href=\"/home/index\">-Home</a>");
+            sb.AppendLine("<h3>All User</h3>");           
             sb.AppendLine("<ul>");
             foreach (var model in ((IRenderable<IEnumerable<AllUsernamesViewModel>>)this).Model)
             {
-                sb.AppendLine($"<li><a href\"/users/profile?id={model.Id}\">{model.Username}</a></li>");
+                sb.AppendLine($"<li><a href=\"/users/profile?id={model.Id}\">{model.Username}</a></li>");
             }
 
             sb.AppendLine("</ul>");

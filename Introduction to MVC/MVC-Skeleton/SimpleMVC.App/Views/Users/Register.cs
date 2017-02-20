@@ -11,6 +11,7 @@
         public string Render()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<a href=\"/home/index\">-Home</a>");
             sb.AppendLine("<h3>Register New User</3>");
             sb.AppendLine("<form action=\"register\" method=\"POST\"></br>");
             sb.AppendLine("Username: <input type=\"text\" name=\"Username\"/></br>");
