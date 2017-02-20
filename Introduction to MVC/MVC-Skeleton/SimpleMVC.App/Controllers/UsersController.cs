@@ -13,13 +13,13 @@
 
     public class UsersController : Controller
     {
-        [HttpGetAttributes]
+        [HttpGet]
         public IActionResult Register()
         {
             return this.View();
         }
 
-        [HttpPostAttributes]
+        [HttpPost]
         public IActionResult<UserViewModel> Register(RegisterUserBindingModel model)
         {
             var user = new User()
@@ -42,6 +42,7 @@
             return this.View(viewModel);
         }
 
+        [HttpGet]
         public IActionResult<IEnumerable<AllUsernamesViewModel>> All()
         {
             IList<User> users = null;
@@ -63,6 +64,47 @@
             }
 
             return this.View(viewModels.AsEnumerable());
+        }
+
+        [HttpGet]
+        public IActionResult<UserProfileViewModel> Profile(int id)
+        {
+            using (var context = new NoteContext())
+            {
+                var user = context.Users.Find(id);
+                var viewModel = new UserProfileViewModel()
+                {
+                    UserId = user.Id,
+                    Username = user.Username,
+                    Notes = user.Notes.Select(
+                        x => new NoteViewModel()
+                        {
+                            Title = x.Title,
+                            Content = x.Content
+                        })
+                };
+
+                return this.View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult<UserProfileViewModel> Profile(AddNoteBindingModel model)
+        {
+            using (var context = new NoteContext())
+            {
+                var user = context.Users.Find(model.UserId);
+                var note = new Note()
+                {
+                    Title = model.Title,
+                    Content = model.Content
+                };
+
+                user.Notes.Add(note);
+                context.SaveChanges();
+            }
+
+            return this.Profile(model.UserId);
         }
     }
 }

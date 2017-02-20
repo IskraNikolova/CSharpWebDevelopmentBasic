@@ -55,15 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart.cs" />
+    <Compile Include="BindingModels\AddNoteBindingModel.cs" />
+    <Compile Include="BindingModels\NoteViewModel.cs" />
     <Compile Include="BindingModels\RegisterUserBindingModel.cs" />
+    <Compile Include="BindingModels\UserProfileViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\NoteContext.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Mvc\Controllers\Controller.cs" />
-    <Compile Include="Mvc\Attributes\Methods\HttpGetAttributes.cs" />
+    <Compile Include="Mvc\Attributes\Methods\HttpGetAttribute.cs" />
     <Compile Include="Mvc\Attributes\Methods\HttpMethodAttribute.cs" />
-    <Compile Include="Mvc\Attributes\Methods\HttpPostAttributes.cs" />
+    <Compile Include="Mvc\Attributes\Methods\HttpPostAttribute.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Mvc\Extensions\StringExtentions.cs" />
     <Compile Include="Mvc\Interfaces\Generic\IActionResult.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="Views\Home\Index.cs" />
     <Compile Include="Views\Users\All.cs" />
+    <Compile Include="Views\Users\Profile.cs" />
     <Compile Include="Views\Users\Register.cs" />
   </ItemGroup>
   <ItemGroup>

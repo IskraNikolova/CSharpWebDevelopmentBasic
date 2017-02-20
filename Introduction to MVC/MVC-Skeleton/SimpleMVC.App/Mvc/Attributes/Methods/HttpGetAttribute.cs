@@ -1,10 +1,10 @@
 ﻿namespace SimpleMVC.App.Mvc.Attributes.Methods
 {
-    public class HttpPostAttributes : HttpMethodAttribute
+    public class HttpGetAttribute : HttpMethodAttribute
     {
         public override bool IsValid(string requestMethod)
         {
-            if (requestMethod.ToUpper() == "POST")
+            if (requestMethod.ToUpper() == "GET")
             {
                 return true;
             }
