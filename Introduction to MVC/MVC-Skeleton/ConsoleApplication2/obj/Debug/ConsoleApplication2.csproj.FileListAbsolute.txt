@@ -1,1 +1,0 @@
-E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe.config
