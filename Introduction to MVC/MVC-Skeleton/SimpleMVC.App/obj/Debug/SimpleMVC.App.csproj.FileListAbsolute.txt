@@ -12,3 +12,17 @@ E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skelet
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.SqlServer.dll
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.xml
 E:\Softuni\05.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.SqlServer.xml
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleMVC.App.exe.config
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\obj\Debug\SimpleMVC.App.exe
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\obj\Debug\SimpleMVC.App.pdb
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\Resources\Pages\404.html
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\Resources\Pages\500.html
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleMVC.App.exe
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleMVC.App.pdb
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.dll
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.SqlServer.dll
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleHttpServer.dll
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\SimpleHttpServer.pdb
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.xml
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\bin\Debug\EntityFramework.SqlServer.xml
+E:\Softuni\07.CSharpWeb\CSharpWebDevelopmentBasic\Introduction to MVC\MVC-Skeleton\SimpleMVC.App\obj\Debug\SimpleMVC.App.csprojResolveAssemblyReference.cache

@@ -1,0 +1,6 @@
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\Registration\bin\Debug\Registration.exe.config
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\Registration\bin\Debug\Registration.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\Registration\bin\Debug\Registration.pdb
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\Registration\obj\Debug\Registration.csprojResolveAssemblyReference.cache
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\Registration\obj\Debug\Registration.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\Registration\obj\Debug\Registration.pdb

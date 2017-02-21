@@ -155,7 +155,7 @@
             string content = result.Invoke();
             var response = new HttpResponse()
             {
-                ContentAsUTF8 = content,
+                ContentAsUtf8 = content,
                 StatusCode = ResponseStatusCode.Ok
             };
 

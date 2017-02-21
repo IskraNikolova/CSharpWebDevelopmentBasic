@@ -1,0 +1,6 @@
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\EncodingAndDecoding\bin\Debug\EncodingAndDecoding.exe.config
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\EncodingAndDecoding\bin\Debug\EncodingAndDecoding.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\EncodingAndDecoding\bin\Debug\EncodingAndDecoding.pdb
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\EncodingAndDecoding\obj\Debug\EncodingAndDecoding.csprojResolveAssemblyReference.cache
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\EncodingAndDecoding\obj\Debug\EncodingAndDecoding.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\EncodingAndDecoding\obj\Debug\EncodingAndDecoding.pdb

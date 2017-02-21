@@ -24,7 +24,7 @@
                     UrlRegex = @"^/home.*$",
                     Callable = (request) =>
                     {
-                        AddCookies(request);
+                        //AddCookies(request);
                         return new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
@@ -39,7 +39,7 @@
                      UrlRegex = @"^/.+?\\?theme=.+$",
                      Callable = (request) =>
                      {
-                        AddCookies(request);
+                        //AddCookies(request);
                         var index = request.Url.IndexOf('?');
                         var themeDict = QueryStringParser.Parser(request.Url.Substring(index + 1));
                         var htmlName = request.Url.Substring(1, index - 1);
@@ -69,7 +69,7 @@
                     UrlRegex = @"^/contacts.*$",
                     Callable = (request) =>
                     {
-                        AddCookies(request);
+                        //AddCookies(request);
                         return new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
@@ -84,7 +84,7 @@
                     UrlRegex = @"^/contacts.*$",
                     Callable = (request) =>
                     {
-                        AddCookies(request);
+                        //AddCookies(request);
                         var queryString = request.Content;
                         IDictionary<string, string> variables = QueryStringParser.Parser(queryString);
                         var service = new MessagesService();
@@ -104,7 +104,7 @@
                     UrlRegex = @"^/about.*$",
                     Callable = (request) =>
                     {
-                        AddCookies(request);
+                        //AddCookies(request);
                         return new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
@@ -119,7 +119,7 @@
                     UrlRegex = @"^/products.*$",
                     Callable = (request) =>
                     {
-                        AddCookies(request);
+                        //AddCookies(request);
                         KnivesService service = new KnivesService();
                         var products = service.GetAllKnivesFromUrl(request.Url);
                         return new HttpResponse()

@@ -1,0 +1,6 @@
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\CGI\bin\Debug\CGI.exe.config
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\CGI\bin\Debug\CGI.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\CGI\bin\Debug\CGI.pdb
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\CGI\obj\Debug\CGI.csprojResolveAssemblyReference.cache
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\CGI\obj\Debug\CGI.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\CGI\obj\Debug\CGI.pdb

@@ -1,0 +1,6 @@
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\DesicionMaking\bin\Debug\DesicionMaking.exe.config
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\DesicionMaking\bin\Debug\DesicionMaking.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\DesicionMaking\bin\Debug\DesicionMaking.pdb
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\DesicionMaking\obj\Debug\DesicionMaking.csprojResolveAssemblyReference.cache
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\DesicionMaking\obj\Debug\DesicionMaking.exe
+E:\Softuni\05.C#Web\C#WebDevelopmentBasic\Test\DesicionMaking\obj\Debug\DesicionMaking.pdb
