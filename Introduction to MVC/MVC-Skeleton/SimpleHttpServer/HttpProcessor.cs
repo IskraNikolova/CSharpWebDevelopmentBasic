@@ -1,51 +1,56 @@
-﻿using SimpleHttpServer.Enums;
-using SimpleHttpServer.Models;
-using SimpleHttpServer.Utilities;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SimpleHttpServer
+﻿namespace SimpleHttpServer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Net.Sockets;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using Enums;
+    using Models;
+    using Utilities;
+
     public class HttpProcessor
     {
-        private IList<Route> Routes;
+        private readonly IList<Route> Routes;
         private HttpRequest Request;
         private HttpResponse Response;
 
-        public HttpProcessor(IEnumerable<Route> routes)
+        private readonly IDictionary<string, HttpSession> sessions;
+
+        public HttpProcessor(
+            IEnumerable<Route> routes, 
+            IDictionary<string, HttpSession> sessions)
         {
             this.Routes = new List<Route>(routes);
+            this.sessions = sessions;
         }
 
         public void HandleClient(TcpClient tcpClient)
         {
             using (var stream = tcpClient.GetStream())
             {
-                Request = GetRequest(stream);
-                Response = RouteRequest();
+                this.Request = this.GetRequest(stream);
+                this.Response = this.RouteRequest();
                 Console.WriteLine("-RESPONSE-------------");
-                Console.WriteLine(Response.Header);
+                Console.WriteLine(this.Response.Header);
                 //Console.WriteLine(Encoding.UTF8.GetString(Response.Content));
                 Console.WriteLine("----------------------");
-                StreamUtils.WriteResponse(stream, Response);
+                StreamUtils.WriteResponse(stream, this.Response);
             }
         }
-
 
         private HttpRequest GetRequest(Stream inputStream)
         {
             //Read Request Line
             string requestLine = StreamUtils.ReadLine(inputStream);
-            string[] tokens = requestLine.Split(' ');
+            string[] tokens = requestLine.Split();
             if (tokens.Length != 3)
             {
-                throw new Exception("invalid http request line");
+                throw new Exception("Invalid http request line");
             }
+
             RequestMethod method = (RequestMethod)Enum.Parse(typeof(RequestMethod), tokens[0].ToUpper());
             string url = tokens[1];
             string protocolVersion = tokens[2];
@@ -63,8 +68,9 @@ namespace SimpleHttpServer
                 int separator = line.IndexOf(':');
                 if (separator == -1)
                 {
-                    throw new Exception("invalid http header line: " + line);
+                    throw new Exception("Invalid http header line: " + line);
                 }
+
                 string name = line.Substring(0, separator);
                 int pos = separator + 1;
                 while ((pos < line.Length) && (line[pos] == ' '))
@@ -93,8 +99,6 @@ namespace SimpleHttpServer
                 }
             }
 
-
-
             string content = null;
             if (header.ContentLength != null)
             {
@@ -114,9 +118,6 @@ namespace SimpleHttpServer
                 content = Encoding.ASCII.GetString(bytes);
             }
 
-
-
-
             var request = new HttpRequest()
             {
                 Method = method,
@@ -124,33 +125,69 @@ namespace SimpleHttpServer
                 Header = header,
                 Content = content
             };
+
+            if (request.Header.Cookies.Contains("sessionId"))
+            {
+                var sessionId = request.Header.Cookies["sessionId"].Value;
+                request.Session = new HttpSession(sessionId);
+                if (!this.sessions.ContainsKey(sessionId))
+                {
+                    this.sessions.Add(sessionId, request.Session);
+                }
+            }
+
             Console.WriteLine("-REQUEST-----------------------------");
             Console.WriteLine(request);
             Console.WriteLine("------------------------------");
 
             return request;
         }
+
         private HttpResponse RouteRequest()
         {
             var routes = this.Routes
-                .Where(x => Regex.Match(Request.Url, x.UrlRegex).Success)
+                .Where(x => Regex.Match(this.Request.Url, x.UrlRegex).Success)
                 .ToList();
 
             if (!routes.Any())
+            {
                 return HttpResponseBuilder.NotFound();
+            }
 
-            var route = routes.SingleOrDefault(x => x.Method == Request.Method);
+            var route = routes
+                .FirstOrDefault(x => x.Method == this.Request.Method);
 
             if (route == null)
-                return new HttpResponse()
+            {
+                var response = new HttpResponse()
                 {
                     StatusCode = ResponseStatusCode.MethodNotAllowed
                 };
 
+                return response;
+            }
+
+            if (this.Request.Session == null)
+            {
+                var session = SessionCreator.Create();
+                this.Request.Session = session;
+            }
+
             // trigger the route handler...
             try
             {
-                return route.Callable(Request);
+                var response = route.Callable(this.Request);
+                if (!this.Request.Header.Cookies.Contains("sessionId"))
+                {
+                    var sessionCookie = new Cookie(
+                        "sessionId", 
+                        this.Request.Session.Id + "; HTTPonly; path=/"
+                        );
+
+                    this.Response.Header.AddCookie(sessionCookie);
+                }
+
+                return response;
             }
             catch (Exception ex)
             {

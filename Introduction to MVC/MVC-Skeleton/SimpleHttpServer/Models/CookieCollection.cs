@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace SimpleHttpServer.Models
+﻿namespace SimpleHttpServer.Models
 {
+    using System.Collections;
+    using System.Collections.Generic;
 
     public class CookieCollection : IEnumerable<Cookie>
     {
@@ -10,7 +9,9 @@ namespace SimpleHttpServer.Models
         {
             this.Cookies = new Dictionary<string, Cookie>();
         }
+
         public IDictionary<string, Cookie> Cookies { get; private set; }
+
         public Cookie this[string cookieName]
         {
             get
@@ -23,7 +24,8 @@ namespace SimpleHttpServer.Models
             }
         }
 
-        public int Count { get { return this.Cookies.Count; } }
+        public int Count => this.Cookies.Count;
+
         public bool Contains(string cookieName)
         {
             return this.Cookies.ContainsKey(cookieName);
@@ -43,6 +45,7 @@ namespace SimpleHttpServer.Models
         {
             return this.Cookies.Values.GetEnumerator();
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
@@ -50,7 +53,7 @@ namespace SimpleHttpServer.Models
 
         public override string ToString()
         {
-            return string.Join("; ", Cookies.Values);
+            return string.Join("; ", this.Cookies.Values);
         }
     }
 }

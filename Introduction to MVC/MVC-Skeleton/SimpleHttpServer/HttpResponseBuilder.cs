@@ -1,9 +1,9 @@
-﻿using SimpleHttpServer.Enums;
-using SimpleHttpServer.Models;
-using System.IO;
-
-namespace SimpleHttpServer
+﻿namespace SimpleHttpServer
 {
+    using System.IO;
+    using Enums;
+    using Models;
+
     public static class HttpResponseBuilder
     {
         public static HttpResponse InternalServerError()
@@ -13,7 +13,7 @@ namespace SimpleHttpServer
             return new HttpResponse()
             {
                 StatusCode = ResponseStatusCode.InternalServerError,
-                ContentAsUTF8 = content
+                ContentAsUtf8 = content
             };
         }
 
@@ -24,7 +24,7 @@ namespace SimpleHttpServer
             return new HttpResponse()
             {
                 StatusCode = ResponseStatusCode.NotFound,
-                ContentAsUTF8 = content
+                ContentAsUtf8 = content
             };
         }
     }

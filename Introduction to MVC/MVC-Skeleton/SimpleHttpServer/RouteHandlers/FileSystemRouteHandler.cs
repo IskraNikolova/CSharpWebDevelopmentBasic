@@ -1,25 +1,26 @@
-﻿using SimpleHttpServer.Enums;
-using SimpleHttpServer.Models;
-using SimpleHttpServer.Utilities;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace SimpleHttpServer.RouteHandlers
+﻿namespace SimpleHttpServer.RouteHandlers
 {
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using Enums;
+    using Models;
+    using Utilities;
+
     public class FileSystemRouteHandler
     {
         public string BasePath { get; set; }
+
         public HttpRequest Request { get; set; }
+
         public string RouteUrlRegex { get; set; }
+
         public HttpResponse Handle(HttpRequest request)
         {
             this.Request = request;
-            var urlPart = "";
-            // extract the path if there is one
-
-            var match = Regex.Match(request.Url, RouteUrlRegex);
+            var urlPart = string.Empty;
+            var match = Regex.Match(request.Url, this.RouteUrlRegex);
             if (match.Groups.Count > 1)
             {
                 urlPart = match.Groups[1].Value;
@@ -28,11 +29,9 @@ namespace SimpleHttpServer.RouteHandlers
             {
                 urlPart = request.Url;
             }
-            //var urlPart = request.Path;
 
             urlPart = SanitarizePath(urlPart);
 
-            // make sure the first part of the path is not 
             if (urlPart.Length > 0)
             {
                 var firstChar = urlPart.ElementAt(0);
@@ -41,15 +40,16 @@ namespace SimpleHttpServer.RouteHandlers
                     urlPart = "." + urlPart;
                 }
             }
+
             var localPath = Path.Combine(this.BasePath, urlPart);
 
             if (Directory.Exists(localPath))
             {
-                return HandleDirectory(localPath);
+                return this.HandleDirectory(localPath);
             }
             else if (File.Exists(localPath))
             {
-                return HandleFile(localPath);
+                return this.HandleFile(localPath);
             }
             else
             {
@@ -65,6 +65,7 @@ namespace SimpleHttpServer.RouteHandlers
             urlPart = urlPart.Replace(@"\\", @"\");
             urlPart = urlPart.Replace(":", "");
             urlPart = urlPart.Replace("/", Path.DirectorySeparatorChar.ToString());
+
             return urlPart;
         }
 
@@ -78,13 +79,14 @@ namespace SimpleHttpServer.RouteHandlers
             response.StatusCode = ResponseStatusCode.Ok;
             response.Content = File.ReadAllBytes(localPath);
             response.Header.ContentLength = response.Content.Length.ToString();
+
             return response;
         }
 
         private HttpResponse HandleDirectory(string localPath)
         {
             var output = new StringBuilder();
-            output.Append(string.Format("<h3> Directory: {0} </h3>", Request.Url));
+            output.Append($"<h3> Directory: {this.Request.Url} </h3>");
             output.Append("<ul>");
             foreach (var folder in Directory.GetDirectories(localPath).OrderBy(d => d))
             {
@@ -104,9 +106,8 @@ namespace SimpleHttpServer.RouteHandlers
             return new HttpResponse()
             {
                 StatusCode = ResponseStatusCode.Ok,
-                ContentAsUTF8 = output.ToString(),
+                ContentAsUtf8 = output.ToString(),
             };
         }
     }
-
 }

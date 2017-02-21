@@ -1,9 +1,9 @@
-﻿using SimpleHttpServer.Enums;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SimpleHttpServer.Models
+﻿namespace SimpleHttpServer.Models
 {
+    using System.Collections.Generic;
+    using System.Text;
+    using Enums;
+
     public class Header
     {
         public Header(HeaderType type)
@@ -13,12 +13,16 @@ namespace SimpleHttpServer.Models
             this.Cookies = new CookieCollection();
             this.OtherParameters = new Dictionary<string, string>();
         }
-        public HeaderType Type { get; set; }
-        public string ContentType { get; set; }
-        public string ContentLength { get; set; }
-        public Dictionary<string, string> OtherParameters { get; set; }
-        public CookieCollection Cookies { get; private set; }
 
+        public HeaderType Type { get; set; }
+
+        public string ContentType { get; set; }
+
+        public string ContentLength { get; set; }
+
+        public Dictionary<string, string> OtherParameters { get; set; }
+
+        public CookieCollection Cookies { get; private set; }
 
         public void AddCookie(Cookie cookie)
         {

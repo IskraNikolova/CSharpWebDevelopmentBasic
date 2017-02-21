@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SimpleHttpServer.Utilities
+﻿namespace SimpleHttpServer.Utilities
 {
+    using System;
+    using System.Collections.Generic;
+
     public class QuickMimeTypeMapper
     {
         public static string GetMimeType(string fileExtension)
@@ -17,17 +17,16 @@ namespace SimpleHttpServer.Utilities
                 fileExtension = "." + fileExtension;
             }
 
-            if (!mimeMappings.ContainsKey(fileExtension))
+            if (!MimeMappings.ContainsKey(fileExtension))
             {
                 return "application/octet-stream";
 
             }
 
-            return mimeMappings[fileExtension];
+            return MimeMappings[fileExtension];
         }
 
-
-        private static IDictionary<string, string> mimeMappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
+        private static readonly IDictionary<string, string> MimeMappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
             #region Huge list of mime types
             {".323", "text/h323"},
@@ -591,9 +590,6 @@ namespace SimpleHttpServer.Utilities
             {".z", "application/x-compress"},
             {".zip", "application/x-zip-compressed"}
         #endregion
-
         };
-
-
     }
 }
