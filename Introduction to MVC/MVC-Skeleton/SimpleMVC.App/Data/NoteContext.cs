@@ -1,19 +1,27 @@
 namespace SimpleMVC.App.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
+    using Migrations;
     using Models;
+    using Mvc.Interfaces;
 
-    public class NoteContext : DbContext
+    public class NoteContext : DbContext, IDbIdentityContext
     {
         public NoteContext()
             : base("name=NoteContext")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<NoteContext, Configuration>());
         }
 
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Note> Notes { get; set; }
+
+        public virtual DbSet<Login> Logins { get; set; }
+
+        public void Save()
+        {
+            this.SaveChanges();
+        }
     }
 }

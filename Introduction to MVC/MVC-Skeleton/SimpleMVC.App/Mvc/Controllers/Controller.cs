@@ -4,6 +4,8 @@
     using Interfaces;
     using Interfaces.Generic;
     using Mvc;
+    using SimpleHttpServer.Enums;
+    using SimpleHttpServer.Models;
     using ViewEngine;
     using ViewEngine.Generic;
 
@@ -51,6 +53,43 @@
                 );
 
             return new ActionResult<T>(fullQualifedName, model);
+        }
+        protected void Redirect(HttpResponse response, string location)
+        {
+            response.Header.Location = location;
+            response.StatusCode = ResponseStatusCode.Found;
+        }
+
+        protected IActionResult Redirect(string location, [CallerMemberName] string callee = "")
+        {
+            string controllerName = this.GetType()
+                .Name
+                .Replace(MvcContext.Current.ControllersSuffix, string.Empty);
+
+            string fullQualifiedName = string.Format(
+                "{0}.{1}.{2}.{3}",
+                MvcContext.Current.AssemblyName,
+                MvcContext.Current.ViewsFolder,
+                controllerName,
+                callee);
+
+            return new ActionResult(fullQualifiedName, location);
+        }
+
+        protected IActionResult<T> Redirect<T>(T model, string location, [CallerMemberName] string callee = "")
+        {
+            string controllerName = this.GetType()
+                .Name
+                .Replace(MvcContext.Current.ControllersSuffix, string.Empty);
+
+            string fullQualifiedName = string.Format(
+                "{0}.{1}.{2}.{3}",
+                MvcContext.Current.AssemblyName,
+                MvcContext.Current.ViewsFolder,
+                controllerName,
+                callee);
+
+            return new ActionResult<T>(fullQualifiedName, model, location);
         }
     }
 }

@@ -4,7 +4,7 @@
 
     public class HttpSession
     {
-        private IDictionary<string, string> parameters;
+        private readonly IDictionary<string, string> parameters;
 
         public HttpSession(string id)
         {
@@ -12,7 +12,7 @@
            this.Id = id;
         }
 
-        public string Id { get; set; }
+        public string Id { get; private set; }
 
         public string this[string key]
         {
@@ -21,7 +21,7 @@
 
         public void Clear()
         {
-            this.parameters = new Dictionary<string, string>();
+            this.parameters.Clear();
         }
 
         public void Add(string key, string value)

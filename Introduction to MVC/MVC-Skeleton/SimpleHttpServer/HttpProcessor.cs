@@ -20,11 +20,11 @@
         private readonly IDictionary<string, HttpSession> sessions;
 
         public HttpProcessor(
-            IEnumerable<Route> routes, 
+            IEnumerable<Route> routes,
             IDictionary<string, HttpSession> sessions)
         {
             this.Routes = new List<Route>(routes);
-            this.sessions = sessions;
+            this.sessions = new Dictionary<string, HttpSession>(sessions);
         }
 
         public void HandleClient(TcpClient tcpClient)
@@ -88,6 +88,10 @@
                         var cookie = new Cookie(cookiePair[0], cookiePair[1]);
                         header.AddCookie(cookie);
                     }
+                }
+                else if (name == "Location")
+                {
+                    header.Location = value;
                 }
                 else if (name == "Content-Length")
                 {
@@ -159,12 +163,10 @@
 
             if (route == null)
             {
-                var response = new HttpResponse()
+                return new HttpResponse()
                 {
                     StatusCode = ResponseStatusCode.MethodNotAllowed
                 };
-
-                return response;
             }
 
             if (this.Request.Session == null)
@@ -173,20 +175,19 @@
                 this.Request.Session = session;
             }
 
-            // trigger the route handler...
+            var response = route.Callable(this.Request);
+            if (!this.Request.Header.Cookies.Contains("sessionId"))
+            {
+                var sessionCookie = new Cookie(
+                                               "sessionId",
+                                               this.Request.Session.Id + "; HTTPonly; path=/"
+                                              );
+
+                response.Header.AddCookie(sessionCookie);
+            }
+
             try
             {
-                var response = route.Callable(this.Request);
-                if (!this.Request.Header.Cookies.Contains("sessionId"))
-                {
-                    var sessionCookie = new Cookie(
-                        "sessionId", 
-                        this.Request.Session.Id + "; HTTPonly; path=/"
-                        );
-
-                    this.Response.Header.AddCookie(sessionCookie);
-                }
-
                 return response;
             }
             catch (Exception ex)

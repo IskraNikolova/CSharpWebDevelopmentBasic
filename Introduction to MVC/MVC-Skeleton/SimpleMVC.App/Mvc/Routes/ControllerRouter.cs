@@ -24,10 +24,15 @@
         private string[] controllerActionParams;
         private string[] controllerAction;
 
+        private HttpRequest request;
+        private HttpResponse response;
+
         public ControllerRouter()
         {
             this.getParams = new Dictionary<string, string>();
             this.postParams = new Dictionary<string, string>();
+            this.request = new HttpRequest();
+            this.response = new HttpResponse();
         }
 
         public void ParseInput(HttpRequest request)
@@ -40,8 +45,8 @@
             }
 
             this.controllerActionParams = url.Split('?');
-            this.controllerAction = this.controllerActionParams[0].Split(new[] {'/'},
-                                                                         StringSplitOptions.RemoveEmptyEntries);
+            this.controllerAction = this.controllerActionParams[0]
+                .Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
             this.controllerActionParams = query.Split('&'); //?
 
             //Retrieve GET parameters
@@ -99,6 +104,21 @@
                                                                  );
                     index++;
                 }
+                else if (param.ParameterType == typeof(HttpRequest))
+                {
+                    this.methodParams[index] = this.request;
+                    index++;
+                }
+                else if (param.ParameterType == typeof(HttpSession))
+                {
+                    this.methodParams[index] = this.request.Session;
+                    index++;
+                }
+                else if (param.ParameterType == typeof(HttpResponse))
+                {
+                    this.methodParams[index] = this.response;
+                    index++;
+                }
                 else
                 {
                     Type bindingModelType = param.ParameterType;
@@ -111,18 +131,16 @@
                     foreach (PropertyInfo property in properties)
                     {
                         property.SetValue(
-                                          bindingModel,
-                                          Convert.ChangeType(
-                                                             postParams[property.Name],
-                                                             property.PropertyType
-                                                            )
+                            bindingModel,
+                            Convert.ChangeType(this.postParams[property.Name],
+                                       property.PropertyType)
                                          );
                     }
 
                     this.methodParams[index] = Convert.ChangeType(
-                                                                  bindingModel,
-                                                                  bindingModelType
-                                                                 );
+                                bindingModel,
+                                bindingModelType
+                                );
                     index++;
                 }
             }
@@ -130,7 +148,8 @@
 
         private void InitActionName()
         {
-            this.actionName = this.controllerAction[this.controllerAction.Length - 1].ToUpperFirst();
+            this.actionName = this.controllerAction[this.controllerAction.Length - 1]
+                .ToUpperFirst();
         }
 
         private void InitMethod(HttpRequest request)
@@ -140,24 +159,28 @@
 
         private void InitControllerName()
         {
-            this.controllerName = this.controllerAction[this.controllerAction.Length - 2].ToUpperFirst() + MvcContext.Current.ControllersSuffix;
+            this.controllerName = this.controllerAction[this.controllerAction.Length - 2]
+                .ToUpperFirst() + MvcContext.Current.ControllersSuffix;
         }
 
         public HttpResponse Handle(HttpRequest request)
         {
+            this.request = request;
+            this.response = new HttpResponse();
+
             this.ParseInput(request);
             var method = this.GetMethod();
             var controller = this.GetController();
+
             IInvocable result =
                 (IInvocable)method
                 .Invoke(controller, this.methodParams);
 
-            string content = result.Invoke();
-            var response = new HttpResponse()
+            if (string.IsNullOrEmpty(this.response.Header.Location))
             {
-                ContentAsUtf8 = content,
-                StatusCode = ResponseStatusCode.Ok
-            };
+                response.StatusCode = ResponseStatusCode.Ok;
+                response.ContentAsUtf8 = result.Invoke();
+            }
 
             this.ClearRequestParameters();
             return response;
@@ -205,11 +228,10 @@
 
         private Controller GetController()
         {
-            var controllerType = string.Format(
-                "{0}.{1}.{2}",
-                MvcContext.Current.AssemblyName,
-                MvcContext.Current.ControllersFolder,
-                this.controllerName);
+            var controllerType =
+                $"{MvcContext.Current.AssemblyName}." +
+                $"{MvcContext.Current.ControllersFolder}." +
+                $"{this.controllerName}";
 
             var controller =
                 (Controller)Activator.CreateInstance(Type.GetType(controllerType));

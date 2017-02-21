@@ -1,9 +1,9 @@
 ﻿namespace SimpleMVC.App.ViewModel
 {
+    using System.Collections.Generic;
+
     public class AllUsernamesViewModel
     {
-        public int Id { get; set; }
-
-        public string Username { get; set; }
+        public IList<string> Usernames { get; set; }
     }
 }

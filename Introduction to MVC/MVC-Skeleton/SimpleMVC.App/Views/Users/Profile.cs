@@ -3,6 +3,8 @@
     using System.Text;
     using BindingModels;
     using Mvc.Interfaces.Generic;
+    using ViewModel;
+
     public class Profile : IRenderable<UserProfileViewModel>
     {
         public UserProfileViewModel Model { get; set; }

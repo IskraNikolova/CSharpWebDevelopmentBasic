@@ -18,6 +18,8 @@
 
         public string ContentType { get; set; }
 
+        public string Location { get; set; }
+
         public string ContentLength { get; set; }
 
         public Dictionary<string, string> OtherParameters { get; set; }
@@ -33,6 +35,11 @@
         {
             StringBuilder header = new StringBuilder();
             header.AppendLine("Content-type: " + this.ContentType);
+            if (this.Location != null)
+            {
+                header.AppendLine("Location: " + this.Location);
+            }
+
             if (this.Cookies.Count > 0)
             {
                 if (this.Type == HeaderType.HttpRequest)
@@ -52,10 +59,12 @@
             {
                 header.AppendLine("Content-Length: " + this.ContentLength);
             }
-            foreach (var other in OtherParameters)
+
+            foreach (var other in this.OtherParameters)
             {
                 header.AppendLine($"{other.Key}: {other.Value}");
             }
+
             header.AppendLine();
 
             return header.ToString();

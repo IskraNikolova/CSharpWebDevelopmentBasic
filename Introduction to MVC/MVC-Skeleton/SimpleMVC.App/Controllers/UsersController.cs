@@ -9,13 +9,61 @@
     using Mvc.Controllers;
     using Mvc.Interfaces;
     using Mvc.Interfaces.Generic;
+    using Mvc.Security;
+    using SimpleHttpServer.Models;
     using ViewModel;
 
     public class UsersController : Controller
     {
+        private readonly SignInManager signInManager;
+
+        public UsersController()
+        {
+            this.signInManager = new SignInManager(new NoteContext());
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
+            return this.View();
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginUserBindingModel model, HttpSession session, HttpResponse response)
+        {
+            string userName = model.Username;
+            string password = model.Password;
+            string sessionId = session.Id;
+
+            using (var context = new NoteContext())
+            {
+                var user = context
+                    .Users
+                    .FirstOrDefault(u => u.Username == userName && u.Password == password);
+
+                if (user != null)
+                {
+                    var login = new Login()
+                    {
+                        IsActive = true,
+                        UserId = user.Id,
+                        SessionId = sessionId,
+                        User = user
+                    };
+
+                    context.Logins.Add(login);
+                    context.Save();
+                }
+
+                this.Redirect(response,"home/index");
+            }
+
             return this.View();
         }
 
@@ -31,7 +79,7 @@
             using (var context = new NoteContext())
             {
                 context.Users.Add(user);
-                context.SaveChanges();
+                context.Save();
             }
 
             var viewModel = new UserViewModel()
@@ -43,27 +91,27 @@
         }
 
         [HttpGet]
-        public IActionResult<IEnumerable<AllUsernamesViewModel>> All()
+        public IActionResult<AllUsernamesViewModel> All(HttpSession session, HttpResponse response)
         {
-            IList<User> users = null;
+            if (!this.signInManager.IsAuthenticated(session))
+            {
+                this.Redirect(response, "login/all");
+                return null;
+            }
+
+            List<string> usernames = null;
 
             using (var context = new NoteContext())
             {
-                users = context.Users.ToList();
+                usernames = context.Users.Select(u => u.Username).ToList();
             }
 
-            var viewModels = new List<AllUsernamesViewModel>();
-
-            foreach (var user in users)
+            AllUsernamesViewModel viewModel = new AllUsernamesViewModel()
             {
-                viewModels.Add(new AllUsernamesViewModel()
-                {
-                    Username = user.Username,
-                    Id = user.Id
-                });
-            }
+                Usernames = usernames
+            };
 
-            return this.View(viewModels.AsEnumerable());
+            return this.View(viewModel);
         }
 
         [HttpGet]
@@ -88,6 +136,17 @@
             }
         }
 
+        [HttpGet]
+        public IActionResult<GreetViewModel>Greet(HttpSession session)
+        {
+            var viewModel = new GreetViewModel()
+            {
+                SessionId = session.Id
+            };
+
+            return this.View(viewModel);
+        }
+
         [HttpPost]
         public IActionResult<UserProfileViewModel> Profile(AddNoteBindingModel model)
         {
@@ -101,7 +160,7 @@
                 };
 
                 user.Notes.Add(note);
-                context.SaveChanges();
+                context.Save();
             }
 
             return this.Profile(model.UserId);

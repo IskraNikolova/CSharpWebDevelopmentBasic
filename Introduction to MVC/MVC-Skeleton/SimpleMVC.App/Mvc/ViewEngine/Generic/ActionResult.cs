@@ -4,15 +4,25 @@
     using Interfaces.Generic;
     public class ActionResult<T> : IActionResult<T>
     {
-        public ActionResult(string viewFullQualifedName, T model)
+        public ActionResult(string viewFullQualifiedName, T model) 
+            : this(viewFullQualifiedName, model, string.Empty)
         {
-            this.Action = (IRenderable<T>) Activator
-                .CreateInstance(Type.GetType(viewFullQualifedName));
+
+        }
+
+        public ActionResult(string viewFullQualifiedName, T model, string location)
+        {
+            this.Action =
+                (IRenderable<T>)Activator
+                    .CreateInstance(Type.GetType(viewFullQualifiedName));
 
             this.Action.Model = model;
+            this.Location = location;
         }
 
         public IRenderable<T> Action { get; set; }
+
+        public string Location { get; set; }
 
         public string Invoke()
         {
