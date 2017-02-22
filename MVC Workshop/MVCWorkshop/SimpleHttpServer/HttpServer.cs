@@ -37,6 +37,7 @@
                 {
                     this.Processor.HandleClient(client);
                 });
+
                 thread.Start();
                 Thread.Sleep(1);
             }

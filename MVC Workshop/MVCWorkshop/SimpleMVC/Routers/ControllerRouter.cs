@@ -205,8 +205,9 @@
                 "{0}.{1}.{2}",
                 MvcContext.Current.AssemblyName,
                 MvcContext.Current.ControllersFolder,
-                this.controllerName);                                       
-                                                                   
+                this.controllerName);
+            var types = MvcContext.Current.ApplicationAssembly.GetTypes();
+                                                            
             var controller =
                 (Controller)Activator
                 .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(controllerType));
