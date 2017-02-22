@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5499146E-765E-4C85-8299-88817B281585}</ProjectGuid>
+    <ProjectGuid>{0A687C16-DF92-468D-AB8D-94A98DBAAD31}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SharpStore</RootNamespace>
-    <AssemblyName>SharpStore</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>SimpleMVC.App</RootNamespace>
+    <AssemblyName>SimpleMVC.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -33,8 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,21 +54,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StartUp.cs" />
+    <Compile Include="AppStart.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="MVC\Attributes\Methods\HttpGetAttribute.cs" />
+    <Compile Include="MVC\Attributes\Methods\HttpMethodAttribute.cs" />
+    <Compile Include="MVC\Attributes\Methods\HttpPostAttribute.cs" />
+    <Compile Include="MVC\Controllers\Controller.cs" />
+    <Compile Include="MVC\Extensions\StringExtensions.cs" />
+    <Compile Include="MVC\Interfaces\Generic\IActionResult.cs" />
+    <Compile Include="MVC\Interfaces\Generic\IRenderable.cs" />
+    <Compile Include="MVC\Interfaces\IActionResult.cs" />
+    <Compile Include="MVC\Interfaces\IInvocable.cs" />
+    <Compile Include="MVC\Interfaces\IRenderable.cs" />
+    <Compile Include="MVC\MvcContext.cs" />
+    <Compile Include="MVC\MvcEngine.cs" />
+    <Compile Include="MVC\Routers\ControllerRouter.cs" />
+    <Compile Include="MVC\ViewEngine\ActionResult.cs" />
+    <Compile Include="MVC\ViewEngine\Generic\ActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteTable.cs" />
+    <Compile Include="Views\Home\Index.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleHttpServer\SimpleHttpServer.csproj">
       <Project>{9e139539-c272-488a-bfcf-caddf458df9d}</Project>
       <Name>SimpleHttpServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SimpleMVC\SimpleMVC.csproj">
-      <Project>{f2ef3059-aa6c-45c8-9dbb-9d36e62af1b8}</Project>
-      <Name>SimpleMVC</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BindingModels\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
