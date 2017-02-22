@@ -15,11 +15,28 @@
 
         public bool IsAuthenticated(HttpSession session)
         {
-            var returnResult = this.dbContext
-                .Logins
+            if (session == null)
+            {
+                return false;
+            }
+
+            var login = this.dbContext.Logins
                 .FirstOrDefault(l => l.SessionId == session.Id && l.IsActive);
 
-            return returnResult != null;
+            return login != null;
+        }
+
+        public void Logout(HttpSession session)
+        {
+            var login = this.dbContext.Logins
+                .FirstOrDefault(l => l.SessionId == session.Id && l.IsActive);
+
+            if (login != null)
+            {
+                login.IsActive = false;
+            }
+            
+            this.dbContext.Save();   
         }
     }
 }

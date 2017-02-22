@@ -9,5 +9,10 @@
         {
             return this.View();
         }
+
+        public IActionResult LogoutIndex()
+        {
+            return this.View();
+        }
     }
 }

@@ -28,6 +28,24 @@
             return this.View();
         }
 
+        [HttpPost]
+        public IActionResult Register(RegisterUserBindingModel model, HttpResponse response)
+        {
+            var user = new User()
+            {
+                Username = model.Username,
+                Password = model.Password
+            };
+
+            using (var context = new NoteContext())
+            {
+                context.Users.Add(user);
+                context.Save();
+            }
+
+            return this.View("Home", "LogoutIndex");
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -45,7 +63,9 @@
             {
                 var user = context
                     .Users
-                    .FirstOrDefault(u => u.Username == userName && u.Password == password);
+                    .FirstOrDefault(u => u.Username == userName &&
+                                         u.Password == password
+                                         );
 
                 if (user != null)
                 {
@@ -61,33 +81,17 @@
                     context.Save();
                 }
 
-                this.Redirect(response,"home/index");
+                this.Redirect(response,"home/logoutIndex");
             }
 
             return this.View();
         }
 
-        [HttpPost]
-        public IActionResult<UserViewModel> Register(RegisterUserBindingModel model)
+        [HttpGet]
+        public IActionResult Logout(HttpSession session)
         {
-            var user = new User()
-            {
-                Username = model.Username,
-                Password = model.Password
-            };
-
-            using (var context = new NoteContext())
-            {
-                context.Users.Add(user);
-                context.Save();
-            }
-
-            var viewModel = new UserViewModel()
-            {
-                Username = model.Username
-            };
-
-            return this.View(viewModel);
+            this.signInManager.Logout(session);
+            return this.View("Home", "Index");
         }
 
         [HttpGet]
@@ -95,7 +99,7 @@
         {
             if (!this.signInManager.IsAuthenticated(session))
             {
-                this.Redirect(response, "login/all");
+                this.Redirect(response, "users/login");
                 return null;
             }
 

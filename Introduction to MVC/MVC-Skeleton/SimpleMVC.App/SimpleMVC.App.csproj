@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\GreetViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="Views\Home\Index.cs" />
+    <Compile Include="Views\Home\LogoutIndex.cs" />
     <Compile Include="Views\Users\All.cs" />
     <Compile Include="Views\Users\Greet.cs" />
     <Compile Include="Views\Users\Login.cs" />
