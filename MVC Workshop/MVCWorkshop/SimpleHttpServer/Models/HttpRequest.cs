@@ -20,11 +20,12 @@
 
         public override string ToString()
         {
-            return string.Format("{0} {1} HTTP/1.1\r\n{2}{3}",
-                this.Method,
-                this.Url,
-                this.Header,
-                this.Content);
+            var method = this.Method;
+            var url = this.Url;
+            var header = this.Header;
+            var content = this.Content;
+
+            return $"{method} {url} HTTP/1.1\r\n{header}{content}";
         }
     }
 }

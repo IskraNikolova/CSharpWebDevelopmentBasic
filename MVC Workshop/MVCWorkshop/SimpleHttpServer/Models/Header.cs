@@ -60,7 +60,7 @@
                 header.AppendLine("Content-Length: " + this.ContentLength);
             }
 
-            foreach (var other in OtherParameters)
+            foreach (var other in this.OtherParameters)
             {
                 header.AppendLine($"{other.Key}: {other.Value}");
             }

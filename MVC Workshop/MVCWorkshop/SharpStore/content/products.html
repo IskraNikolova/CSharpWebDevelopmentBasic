@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/carousel.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-inverse" id="navbar1">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/home/index">Sharp Store</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/home/products">Products</a></li>
+                    <li><a href="/home/about">About Us</a></li>
+                    <li><a href="/home/contacts">Contacts</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Theme
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="?theme=dark">Dark</a></li>
+                            <li><a href="?theme=lignt">Light</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <form method="GET">
+                        <input type="text" class="form-control" name="knife-name" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Find</button>
+                        </span>
+                    </form>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+        <br />
+        <div class="row">
+            {0}
+        </div>
+        <footer>
+            <p>
+                &copy; Sharp Store Inc
+                <a href="#">. Privacy</a>
+                <a href="#">. Terms</a>
+            </p>
+            <p class="pull-right"><a href="#navbar1">Back to top</a></p>
+        </footer>
+    </div>
+    <script src="jquery/jquery-3.1.1.js"></script>
+ <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">500x500</text></svg>
+</body>
+</html>

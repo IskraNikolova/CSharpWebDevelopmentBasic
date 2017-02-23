@@ -35,23 +35,23 @@
             this.response = new HttpResponse();
         }
 
-        public HttpResponse Handle(HttpRequest request)
+        public HttpResponse Handle(HttpRequest newRequest)
         {
-            this.request = request;
-            this.response = new HttpResponse();
-            this.ParseInput();
+                this.request = newRequest;
+                this.response = new HttpResponse();
+                this.ParseInput();
 
-            IInvocable result =
-                (IInvocable)this.GetMethod()
-                .Invoke(this.GetController(), this.methodParams);
+                IInvocable result =
+                    (IInvocable) this.GetMethod()
+                                     .Invoke(this.GetController(), this.methodParams);
 
-            if (string.IsNullOrEmpty(this.response.Header.Location))
-            {
-                this.response.StatusCode = ResponseStatusCode.Ok;
-                this.response.ContentAsUTF8 = result.Invoke();
-            }
+                if (string.IsNullOrEmpty(this.response.Header.Location))
+                {
+                    this.response.StatusCode = ResponseStatusCode.OK;
+                    this.response.ContentAsUTF8 = result.Invoke();
+                }
 
-            this.ClearParameters();
+                this.ClearParameters();
 
             return this.response;
         }
@@ -193,10 +193,12 @@
         }
         private IEnumerable<MethodInfo> GetSuitableMethods()
         {
-            return this.GetController()
+            var results = this.GetController()
                 .GetType()
                 .GetMethods()
                 .Where(m => m.Name == this.actionName);
+
+            return results;
         }
 
         private Controller GetController()
@@ -206,7 +208,6 @@
                 MvcContext.Current.AssemblyName,
                 MvcContext.Current.ControllersFolder,
                 this.controllerName);
-            var types = MvcContext.Current.ApplicationAssembly.GetTypes();
                                                             
             var controller =
                 (Controller)Activator

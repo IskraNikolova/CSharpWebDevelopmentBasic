@@ -15,7 +15,13 @@ namespace SimpleHttpServer.Models
     {
         public ResponseStatusCode StatusCode { get; set; }
 
-        public string StatusMessage => Enum.GetName(typeof(ResponseStatusCode), this.StatusCode);
+        public string StatusMessage
+        {
+            get
+            {
+                return Enum.GetName(typeof(ResponseStatusCode), this.StatusCode);
+            }
+        }
 
         public byte[] Content { get; set; }
 
@@ -37,10 +43,13 @@ namespace SimpleHttpServer.Models
 
         public override string ToString()
         {
-            return string.Format("HTTP/1.1 {0} {1}\r\n{2}",
-                (int)this.StatusCode,
-                this.StatusMessage,
-                this.Header);
+            var statusCode = (int) this.StatusCode;
+            var statusMessage = this.StatusCode;
+            var header = this.Header;
+
+            var response = $"HTTP/1.1 {statusCode} {statusMessage}\r\n{header}";
+
+            return response;
         }
     }
 }

@@ -16,54 +16,90 @@
                 {
                     new Route()
                     {
-                        Name = "Carousel CSS",
+                        Name = "Favicon",
                         Method = RequestMethod.GET,
-                        UrlRegex = "/content/css/carousel.css$",
+                        UrlRegex = "/favicon.ico$",
                         Callable = (request) =>
                         {
                             var response = new HttpResponse()
                             {
-                                StatusCode = ResponseStatusCode.Ok,
-                                ContentAsUTF8 = File.ReadAllText("../../content/css/carousel.css")
+                                StatusCode = ResponseStatusCode.OK,
+                                Content = File.ReadAllBytes("../../content/favicon.ico")
                             };
 
-                            response.Header.ContentType = "text/css";
-                            return response;
-                        }
-                    },
-                    new Route()
-                    {
-                        Name = "Bootstrap JS",
-                        Method = RequestMethod.GET,
-                        UrlRegex = "/bootstrap/js/bootstrap.min.js$",
-                        Callable = (request) =>
-                        {
-                            var response = new HttpResponse()
-                            {
-                                StatusCode = ResponseStatusCode.Ok,
-                                ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/js/bootstrap.min.js")
-                            };
-                            response.Header.ContentType = "application/x-javascript";
+                            response.Header.ContentType = "image/x-icon";
                             return response;
                         }
                     },
                      new Route()
+                {
+                    Name = "Bootstrap CSS",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"home/bootstrap/css/bootstrap.min.css$",
+                    Callable = (request) =>
                     {
-                        Name = "Bootstrap Css",
-                        Method = RequestMethod.GET,
-                        UrlRegex = "/bootstrap/css/bootstrap.min.css$",
-                        Callable = (request) =>
+                        var response = new HttpResponse()
                         {
-                            var response = new HttpResponse()
-                            {
-                                StatusCode = ResponseStatusCode.Ok,
-                                ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/css/bootstrap.min.css")
-                            };
+                            StatusCode = ResponseStatusCode.OK,
+                            ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/css/bootstrap.min.css")
+                        };
 
-                            response.Header.ContentType = "text/css";
-                            return response;
-                        }
-                    },
+                        response.Header.ContentType = "text/css";
+                        return response;
+                    }
+                },
+                new Route()
+                {
+                    Name = "Carousel CSS",
+                    Method = RequestMethod.GET,
+                    UrlRegex = "home/css/.+$",
+                    Callable = (request) =>
+                               {
+                                   var cssFileName = request.Url.Substring(request.Url.LastIndexOf('/') + 1);
+                        var response = new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.OK,
+                            ContentAsUTF8 = File.ReadAllText($"../../content/css/{cssFileName}")
+                        };
+
+                        response.Header.ContentType = "text/css";
+                        return response;
+                    }
+                },
+                new Route()
+                {
+                    Name = "Jquery",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"home/jquery/jquery-3.1.1.js$",
+                    Callable = (request) =>
+                    {
+                        var response = new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.OK,
+                            ContentAsUTF8 = File.ReadAllText("../../content/jquery/jquery-3.1.1.js")
+                        };
+
+                        response.Header.ContentType = "application/x-javascript";
+                        return response;
+                    }
+                },
+                new Route()
+                {
+                    Name = "Bootstrap JS",
+                    Method = RequestMethod.GET,
+                    UrlRegex = @"home/bootstrap/js/bootstrap.min.js$",
+                    Callable = (request) =>
+                    {
+                        var response = new HttpResponse()
+                        {
+                            StatusCode = ResponseStatusCode.OK,
+                            ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/js/bootstrap.min.js")
+                        };
+
+                        response.Header.ContentType = "application/x-javascript";
+                        return response;
+                    }
+                },
                     new Route()
                     {
                         Name = "Controller/Action/GET",

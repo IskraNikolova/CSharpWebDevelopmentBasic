@@ -32,7 +32,7 @@
                 this.Response = this.RouteRequest();
                 Console.WriteLine("-RESPONSE-------------");
                 Console.WriteLine(this.Response.Header);
-                //Console.WriteLine(Encoding.UTF8.GetString(Response.Content));
+                //Console.WriteLine(Encoding.UTF8.GetString(this.Response.Content));
                 Console.WriteLine("----------------------");
                 StreamUtils.WriteResponse(stream, this.Response);
             }
@@ -41,12 +41,12 @@
         private HttpRequest GetRequest(Stream inputStream)
         {
             string requestLine = StreamUtils.ReadLine(inputStream);
-            string[] tokens = requestLine.Split(' ');
+            string[] tokens = requestLine.Split();
 
             while (tokens.Length != 3)
             {
                 requestLine = StreamUtils.ReadLine(inputStream);
-                tokens = requestLine.Split(' ');      
+                tokens = requestLine.Split();
             }
 
             RequestMethod method = (RequestMethod)Enum.Parse(typeof(RequestMethod), tokens[0]
@@ -68,7 +68,7 @@
                 int separator = line.IndexOf(':');
                 if (separator == -1)
                 {
-                    throw new Exception("invalid http header line: " + line);
+                    throw new Exception("Invalid http header line: " + line);
                 }
 
                 string name = line.Substring(0, separator);
@@ -163,11 +163,13 @@
             var route = routes
                 .FirstOrDefault(x => x.Method == this.Request.Method);
 
+
             if (route == null)
                 return new HttpResponse()
                 {
                     StatusCode = ResponseStatusCode.MethodNotAllowed
                 };
+
 
             // trigger the route handler...
             try
@@ -180,6 +182,7 @@
                     var sessionCookie = new Cookie("sessionId", session.Id + "; HttpOnly; path=/");
                     response.Header.AddCookie(sessionCookie);
                 }
+
 
                 return response;
             }

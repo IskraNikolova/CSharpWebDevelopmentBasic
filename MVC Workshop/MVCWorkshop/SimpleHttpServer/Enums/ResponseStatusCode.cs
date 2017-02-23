@@ -3,7 +3,7 @@
     public enum ResponseStatusCode
     {
         Continue = 100,
-        Ok = 200,
+        OK = 200,
         Created = 201,
         Accepted = 202,
         MovedPermanently = 301,

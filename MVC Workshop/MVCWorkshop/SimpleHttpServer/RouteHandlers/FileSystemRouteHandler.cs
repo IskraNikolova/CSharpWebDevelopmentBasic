@@ -77,7 +77,7 @@
             var response = new HttpResponse();
             response.Header.ContentType = QuickMimeTypeMapper.GetMimeType(fileExtension);
 
-            response.StatusCode = ResponseStatusCode.Ok;
+            response.StatusCode = ResponseStatusCode.OK;
             response.Content = File.ReadAllBytes(localPath);
             response.Header.ContentLength = response.Content.Length.ToString();
             return response;
@@ -106,7 +106,7 @@
 
             return new HttpResponse()
             {
-                StatusCode = ResponseStatusCode.Ok,
+                StatusCode = ResponseStatusCode.OK,
                 ContentAsUTF8 = output.ToString(),
             };
         }
