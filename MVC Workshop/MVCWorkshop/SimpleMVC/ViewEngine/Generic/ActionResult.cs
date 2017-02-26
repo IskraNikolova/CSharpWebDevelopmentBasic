@@ -9,7 +9,7 @@ namespace SimpleMVC.ViewEngine.Generic
         {
             this.Action =
                 (IRenderable<T>)Activator
-                .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(viewFullQualifiedName));
+                .CreateInstance(type: MvcContext.Current.ApplicationAssembly.GetType(name: viewFullQualifiedName));
 
             this.Action.Model = model;
         }

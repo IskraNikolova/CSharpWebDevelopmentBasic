@@ -8,7 +8,7 @@
         public static HttpSession Create()
         {
             var sessionId = new Random().Next().ToString();
-            var session = new HttpSession(sessionId);
+            var session = new HttpSession(id: sessionId);
 
             return session;
         }

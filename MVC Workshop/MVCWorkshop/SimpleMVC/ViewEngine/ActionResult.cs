@@ -8,7 +8,7 @@
         public ActionResult(string viewFullQualifedName)
         {
             this.Action = (IRenderable)Activator
-                .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(viewFullQualifedName));
+                .CreateInstance(type: MvcContext.Current.ApplicationAssembly.GetType(name: viewFullQualifedName));
         }
 
         public IRenderable Action { get; set; }

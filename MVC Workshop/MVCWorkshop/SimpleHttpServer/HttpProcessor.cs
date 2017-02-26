@@ -20,7 +20,7 @@
 
         public HttpProcessor(IEnumerable<Route> routes, IDictionary<string, HttpSession> sessions)
         {
-            this.Routes = new List<Route>(routes);
+            this.Routes = new List<Route>(collection: routes);
             this.sessions = sessions;
         }
 
@@ -28,57 +28,57 @@
         {
             using (var stream = tcpClient.GetStream())
             {
-                this.Request = this.GetRequest(stream);
+                this.Request = this.GetRequest(inputStream: stream);
                 this.Response = this.RouteRequest();
-                Console.WriteLine("-RESPONSE-------------");
-                Console.WriteLine(this.Response.Header);
+                Console.WriteLine(value: "-RESPONSE-------------");
+                Console.WriteLine(value: this.Response.Header);
                 //Console.WriteLine(Encoding.UTF8.GetString(this.Response.Content));
-                Console.WriteLine("----------------------");
-                StreamUtils.WriteResponse(stream, this.Response);
+                Console.WriteLine(value: "----------------------");
+                StreamUtils.WriteResponse(stream: stream, response: this.Response);
             }
         }
 
         private HttpRequest GetRequest(Stream inputStream)
         {
-            string requestLine = StreamUtils.ReadLine(inputStream);
+            string requestLine = StreamUtils.ReadLine(stream: inputStream);
             string[] tokens = requestLine.Split();
 
             while (tokens.Length != 3)
             {
-                requestLine = StreamUtils.ReadLine(inputStream);
+                requestLine = StreamUtils.ReadLine(stream: inputStream);
                 tokens = requestLine.Split();
             }
 
-            RequestMethod method = (RequestMethod)Enum.Parse(typeof(RequestMethod), tokens[0]
+            RequestMethod method = (RequestMethod)Enum.Parse(enumType: typeof(RequestMethod), value: tokens[0]
                 .ToUpper());
 
             string url = tokens[1];
             string protocolVersion = tokens[2];
 
             //Read Headers
-            Header header = new Header(HeaderType.HttpRequest);
+            Header header = new Header(type: HeaderType.HttpRequest);
             string line;
-            while ((line = StreamUtils.ReadLine(inputStream)) != null)
+            while ((line = StreamUtils.ReadLine(stream: inputStream)) != null)
             {
-                if (line.Equals(""))
+                if (line.Equals(value: ""))
                 {
                     break;
                 }
 
-                int separator = line.IndexOf(':');
+                int separator = line.IndexOf(value: ':');
                 if (separator == -1)
                 {
-                    throw new Exception("Invalid http header line: " + line);
+                    throw new Exception(message: "Invalid http header line: " + line);
                 }
 
-                string name = line.Substring(0, separator);
+                string name = line.Substring(startIndex: 0, length: separator);
                 int pos = separator + 1;
-                while ((pos < line.Length) && (line[pos] == ' '))
+                while ((pos < line.Length) && (line[index: pos] == ' '))
                 {
                     pos++;
                 }
 
-                string value = line.Substring(pos, line.Length - pos);
+                string value = line.Substring(startIndex: pos, length: line.Length - pos);
                 if (name == "Cookie")
                 {
                     string[] cookieSaves = value.Split(';');
@@ -86,11 +86,11 @@
                     {
                         string[] cookiePair = cookieSave
                             .Split('=')
-                            .Select(x => x.Trim())
+                            .Select(selector: x => x.Trim())
                             .ToArray();
 
                         var cookie = new Cookie(cookiePair[0], cookiePair[1]);
-                        header.AddCookie(cookie);
+                        header.AddCookie(cookie: cookie);
                     }
                 }
                 else if (name == "Location")
@@ -103,27 +103,27 @@
                 }
                 else
                 {
-                    header.OtherParameters.Add(name, value);
+                    header.OtherParameters.Add(key: name, value: value);
                 }
             }
 
             string content = null;
             if (header.ContentLength != null)
             {
-                int totalBytes = Convert.ToInt32(header.ContentLength);
+                int totalBytes = Convert.ToInt32(value: header.ContentLength);
                 int bytesLeft = totalBytes;
                 byte[] bytes = new byte[totalBytes];
 
                 while (bytesLeft > 0)
                 {
                     byte[] buffer = new byte[bytesLeft > 1024 ? 1024 : bytesLeft];
-                    int n = inputStream.Read(buffer, 0, buffer.Length);
-                    buffer.CopyTo(bytes, totalBytes - bytesLeft);
+                    int n = inputStream.Read(buffer: buffer, offset: 0, count: buffer.Length);
+                    buffer.CopyTo(array: bytes, index: totalBytes - bytesLeft);
 
                     bytesLeft -= n;
                 }
 
-                content = Encoding.ASCII.GetString(bytes);
+                content = Encoding.ASCII.GetString(bytes: bytes);
             }
 
             var request = new HttpRequest()
@@ -134,19 +134,19 @@
                 Content = content
             };
 
-            if (request.Header.Cookies.Contains("sessionId"))
+            if (request.Header.Cookies.Contains(cookieName: "sessionId"))
             {
-                var sessionId = request.Header.Cookies["sessionId"].Value;
-                request.Session = new HttpSession(sessionId);
-                if (!this.sessions.ContainsKey(sessionId))
+                var sessionId = request.Header.Cookies[cookieName: "sessionId"].Value;
+                request.Session = new HttpSession(id: sessionId);
+                if (!this.sessions.ContainsKey(key: sessionId))
                 {
-                    this.sessions.Add(sessionId, request.Session);
+                    this.sessions.Add(key: sessionId, value: request.Session);
                 }
             }
 
-            Console.WriteLine("-REQUEST-----------------------------");
-            Console.WriteLine(request);
-            Console.WriteLine("------------------------------");
+            Console.WriteLine(value: "-REQUEST-----------------------------");
+            Console.WriteLine(value: request);
+            Console.WriteLine(value: "------------------------------");
 
             return request;
         }
@@ -154,14 +154,14 @@
         private HttpResponse RouteRequest()
         {
             var routes = this.Routes
-                .Where(x => Regex.Match(this.Request.Url, x.UrlRegex).Success)
+                .Where(predicate: x => Regex.Match(input: this.Request.Url, pattern: x.UrlRegex).Success)
                 .ToList();
 
             if (!routes.Any())
                 return HttpResponseBuilder.NotFound();
 
             var route = routes
-                .FirstOrDefault(x => x.Method == this.Request.Method);
+                .FirstOrDefault(predicate: x => x.Method == this.Request.Method);
 
 
             if (route == null)
@@ -174,13 +174,13 @@
             // trigger the route handler...
             try
             {
-                var response = route.Callable(this.Request);
-                if (!this.Request.Header.Cookies.Contains("sessionId") ||
+                var response = route.Callable(arg: this.Request);
+                if (!this.Request.Header.Cookies.Contains(cookieName: "sessionId") ||
                      this.Request.Session == null)
                 {
                     var session = SessionCreator.Create();
-                    var sessionCookie = new Cookie("sessionId", session.Id + "; HttpOnly; path=/");
-                    response.Header.AddCookie(sessionCookie);
+                    var sessionCookie = new Cookie(name: "sessionId", value: session.Id + "; HttpOnly; path=/");
+                    response.Header.AddCookie(cookie: sessionCookie);
                 }
 
 
@@ -188,8 +188,8 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(value: ex.Message);
+                Console.WriteLine(value: ex.StackTrace);
 
                 return HttpResponseBuilder.InternalServerError();
             }

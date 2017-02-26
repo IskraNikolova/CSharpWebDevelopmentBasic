@@ -4,7 +4,7 @@
     {
         public static string ToUpperFirst(this string str)
         {
-            return char.ToUpper(str[0]) + str.Substring(1);
+            return char.ToUpper(c: str[index: 0]) + str.Substring(startIndex: 1);
         }
     }
 }

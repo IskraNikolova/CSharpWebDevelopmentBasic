@@ -14,7 +14,7 @@
         {
             string controllerName = this.GetType()
                 .Name
-                .Replace(MvcContext.Current.ControllersSuffix, string.Empty);
+                .Replace(oldValue: MvcContext.Current.ControllersSuffix, newValue: string.Empty);
 
             string fullQualifedName = string.Format(
                 "{0}.{1}.{2}.{3}",
@@ -23,7 +23,7 @@
                 controllerName,
                 callee);
 
-            return new ActionResult(fullQualifedName);
+            return new ActionResult(viewFullQualifedName: fullQualifedName);
         }
 
         protected IActionResult View(string controller, string action)
@@ -35,14 +35,14 @@
                 controller,
                 action);
 
-            return new ActionResult(fullQualifedName);
+            return new ActionResult(viewFullQualifedName: fullQualifedName);
         }
 
         protected IActionResult<T> View<T>(T model, [CallerMemberName]string callee = "")
         {
             string controllerName = this.GetType()
                 .Name
-                .Replace(MvcContext.Current.ControllersSuffix, string.Empty);
+                .Replace(oldValue: MvcContext.Current.ControllersSuffix, newValue: string.Empty);
 
             string fullQualifedName = string.Format(
                "{0}.{1}.{2}.{3}",
@@ -51,7 +51,7 @@
                controllerName,
                callee);
 
-            return new ActionResult<T>(fullQualifedName, model);
+            return new ActionResult<T>(viewFullQualifiedName: fullQualifedName, model: model);
         }
 
         protected IActionResult<T> View<T>(T model, string controller, string action)
@@ -63,7 +63,7 @@
                 controller,
                 action);
 
-            return new ActionResult<T>(fullQualifedName, model);
+            return new ActionResult<T>(viewFullQualifiedName: fullQualifedName, model: model);
         }
 
         public void Redirect(HttpResponse response, string location)

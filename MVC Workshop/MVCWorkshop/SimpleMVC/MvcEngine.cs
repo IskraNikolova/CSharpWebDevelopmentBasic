@@ -8,8 +8,8 @@
     {
         public static void Run(HttpServer server, string applicationAssemblyName)
         {
-            RegisterAssemblyName(applicationAssemblyName);
-            LoadApplicationAssembly(applicationAssemblyName);
+            RegisterAssemblyName(applicationAssemblyName: applicationAssemblyName);
+            LoadApplicationAssembly(applicationAssemblyName: applicationAssemblyName);
             RegisterControllers();
             RegisterViews();
             RegisterModels();
@@ -20,13 +20,13 @@
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(value: e.Message);
             }
         }
 
         private static void LoadApplicationAssembly(string applicationAssemblyName)
         {
-            MvcContext.Current.ApplicationAssembly = Assembly.Load(applicationAssemblyName);
+            MvcContext.Current.ApplicationAssembly = Assembly.Load(assemblyString: applicationAssemblyName);
         }
 
         private static void RegisterAssemblyName(string applicationAssemblyName)

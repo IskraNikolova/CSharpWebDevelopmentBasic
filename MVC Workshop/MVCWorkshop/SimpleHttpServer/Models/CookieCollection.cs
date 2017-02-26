@@ -16,11 +16,11 @@
         {
             get
             {
-                return this.Cookies[cookieName];
+                return this.Cookies[key: cookieName];
             }
             set
             {
-                this.Add(value);
+                this.Add(cookie: value);
             }
         }
 
@@ -28,17 +28,17 @@
 
         public bool Contains(string cookieName)
         {
-            return this.Cookies.ContainsKey(cookieName);
+            return this.Cookies.ContainsKey(key: cookieName);
         }
 
         public void Add(Cookie cookie)
         {
-            if (!this.Cookies.ContainsKey(cookie.Name))
+            if (!this.Cookies.ContainsKey(key: cookie.Name))
             {
-                this.Cookies.Add(cookie.Name, new Cookie());
+                this.Cookies.Add(key: cookie.Name, value: new Cookie());
             }
 
-            this.Cookies[cookie.Name] = cookie;
+            this.Cookies[key: cookie.Name] = cookie;
         }
 
         public IEnumerator<Cookie> GetEnumerator()
@@ -53,7 +53,7 @@
 
         public override string ToString()
         {
-            return string.Join("; ", this.Cookies.Values);
+            return string.Join(separator: "; ", values: this.Cookies.Values);
         }
     }
 }

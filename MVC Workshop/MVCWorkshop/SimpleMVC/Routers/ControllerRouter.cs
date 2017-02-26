@@ -43,9 +43,9 @@
 
                 IInvocable result =
                     (IInvocable) this.GetMethod()
-                                     .Invoke(this.GetController(), this.methodParams);
+                                     .Invoke(obj: this.GetController(), parameters: this.methodParams);
 
-                if (string.IsNullOrEmpty(this.response.Header.Location))
+                if (string.IsNullOrEmpty(value: this.response.Header.Location))
                 {
                     this.response.StatusCode = ResponseStatusCode.OK;
                     this.response.ContentAsUTF8 = result.Invoke();
@@ -81,16 +81,16 @@
 
         public void ParseInput()
         {
-            string uri = WebUtility.UrlDecode(this.request.Url);
+            string uri = WebUtility.UrlDecode(encodedValue: this.request.Url);
             string query = string.Empty;
-            if (this.request.Url.Contains("?"))
+            if (this.request.Url.Contains(value: "?"))
             {
                 query = this.request.Url.Split('?')[1];
             }
 
             this.controllerActionParams = uri.Split('?');
             this.controllerAction = this.controllerActionParams[0]
-                .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                .Split(separator: new char[] { '/' }, options: StringSplitOptions.RemoveEmptyEntries);
             this.controllerActionParams = query.Split('&');
 
             //Retrieve GET parameters
@@ -98,23 +98,23 @@
             {
                 foreach (var pair in this.controllerActionParams)
                 {
-                    if (pair.Contains("="))
+                    if (pair.Contains(value: "="))
                     {
                         string[] keyValue = pair.Split('=');
-                        this.getParams.Add(keyValue[0], keyValue[1]);
+                        this.getParams.Add(key: keyValue[0], value: keyValue[1]);
                     }
                 }
             }
 
             //Retrieve POST parameters
-            string postParameters = WebUtility.UrlDecode(this.request.Content);
+            string postParameters = WebUtility.UrlDecode(encodedValue: this.request.Content);
             if (postParameters != null)
             {
                 string[] pairs = postParameters.Split('&');
                 foreach (var pair in pairs)
                 {
                     string[] keyValue = pair.Split('=');
-                    this.postParams.Add(keyValue[0], keyValue[1]);
+                    this.postParams.Add(key: keyValue[0], value: keyValue[1]);
                 }
             }
 
@@ -126,7 +126,7 @@
 
             if (method == null)
             {
-                throw new NotSupportedException("No such method");
+                throw new NotSupportedException(message: "No such method");
             }
 
             IEnumerable<ParameterInfo> parameters
@@ -141,10 +141,10 @@
             {
                 if (param.ParameterType.IsPrimitive || param.ParameterType.Name == "String")
                 {
-                    object value = this.getParams[param.Name];
+                    object value = this.getParams[key: param.Name];
                     this.methodParams[index] = Convert.ChangeType(
-                        value,
-                        param.ParameterType
+                        value: value,
+                        conversionType: param.ParameterType
                         );
                     index++;
                 }
@@ -176,16 +176,16 @@
                     {
                         property.SetValue(
                             bindingModel,
-                            Convert.ChangeType(
-                                this.postParams[property.Name],
+                             Convert.ChangeType(
+                               this.postParams[property.Name],
                                 property.PropertyType
                                 )
                             );
                     }
 
                     this.methodParams[index] = Convert.ChangeType(
-                        bindingModel,
-                        bindingModelType
+                        value: bindingModel,
+                        conversionType: bindingModelType
                         );
                     index++;
                 }
@@ -196,7 +196,7 @@
             var results = this.GetController()
                 .GetType()
                 .GetMethods()
-                .Where(m => m.Name == this.actionName);
+                .Where(predicate: m => m.Name == this.actionName);
 
             return results;
         }
@@ -208,10 +208,10 @@
                 MvcContext.Current.AssemblyName,
                 MvcContext.Current.ControllersFolder,
                 this.controllerName);
-                                                            
+                                                      
             var controller =
                 (Controller)Activator
-                .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(controllerType));
+                .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(name: controllerType));
 
             return controller;
         }

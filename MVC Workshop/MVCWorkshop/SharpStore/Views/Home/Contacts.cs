@@ -7,7 +7,7 @@
     {
         public string Render()
         {
-            return File.ReadAllText("../../content/contacts.html");
+            return File.ReadAllText(path: "../../content/contacts.html");
         }
     }
 }

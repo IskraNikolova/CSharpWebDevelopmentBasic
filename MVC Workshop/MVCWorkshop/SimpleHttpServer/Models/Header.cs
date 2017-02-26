@@ -28,41 +28,41 @@
 
         public void AddCookie(Cookie cookie)
         {
-            this.Cookies.Add(cookie);
+            this.Cookies.Add(cookie: cookie);
         }
 
         public override string ToString()
         {
             StringBuilder header = new StringBuilder();
-            header.AppendLine("Content-type: " + this.ContentType);
+            header.AppendLine(value: "Content-type: " + this.ContentType);
             if (this.Location != null)
             {
-                header.AppendLine("Location: " + this.Location);
+                header.AppendLine(value: "Location: " + this.Location);
             }
             
             if (this.Cookies.Count > 0)
             {
                 if (this.Type == HeaderType.HttpRequest)
                 {
-                    header.AppendLine("Cookie: " + this.Cookies.ToString());
+                    header.AppendLine(value: "Cookie: " + this.Cookies.ToString());
                 }
                 else if (this.Type == HeaderType.HttpResponse)
                 {
                     foreach (var cookie in this.Cookies)
                     {
-                        header.AppendLine("Set-Cookie: " + cookie);
+                        header.AppendLine(value: "Set-Cookie: " + cookie);
                     }
                 }
             }
 
             if (this.ContentLength != null)
             {
-                header.AppendLine("Content-Length: " + this.ContentLength);
+                header.AppendLine(value: "Content-Length: " + this.ContentLength);
             }
 
             foreach (var other in this.OtherParameters)
             {
-                header.AppendLine($"{other.Key}: {other.Value}");
+                header.AppendLine(value: $"{other.Key}: {other.Value}");
             }
             header.AppendLine();
 

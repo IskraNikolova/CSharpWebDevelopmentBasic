@@ -7,7 +7,7 @@
     {
         public string Render()
         {
-            return File.ReadAllText("../../content/home.html");
+            return File.ReadAllText(path: "../../content/home.html");
         }
     }
 }

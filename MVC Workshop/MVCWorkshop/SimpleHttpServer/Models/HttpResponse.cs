@@ -19,7 +19,7 @@ namespace SimpleHttpServer.Models
         {
             get
             {
-                return Enum.GetName(typeof(ResponseStatusCode), this.StatusCode);
+                return Enum.GetName(enumType: typeof(ResponseStatusCode), value: this.StatusCode);
             }
         }
 
@@ -31,13 +31,13 @@ namespace SimpleHttpServer.Models
         {
             set
             {
-                this.Content = Encoding.UTF8.GetBytes(value);
+                this.Content = Encoding.UTF8.GetBytes(s: value);
             }
         }
 
         public HttpResponse()
         {
-            this.Header = new Header(HeaderType.HttpResponse);
+            this.Header = new Header(type: HeaderType.HttpResponse);
             this.Content = new byte[] { };
         }
 

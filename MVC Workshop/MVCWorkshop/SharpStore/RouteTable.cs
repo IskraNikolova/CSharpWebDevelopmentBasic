@@ -24,7 +24,7 @@
                             var response = new HttpResponse()
                             {
                                 StatusCode = ResponseStatusCode.OK,
-                                Content = File.ReadAllBytes("../../content/favicon.ico")
+                                Content = File.ReadAllBytes(path: "../../content/favicon.ico")
                             };
 
                             response.Header.ContentType = "image/x-icon";
@@ -35,13 +35,13 @@
                 {
                     Name = "Bootstrap CSS",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"home/bootstrap/css/bootstrap.min.css$",
+                    UrlRegex = @"/bootstrap/css/bootstrap.min.css$",
                     Callable = (request) =>
                     {
                         var response = new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
-                            ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/css/bootstrap.min.css")
+                            ContentAsUTF8 = File.ReadAllText(path: "../../content/bootstrap/css/bootstrap.min.css")
                         };
 
                         response.Header.ContentType = "text/css";
@@ -52,14 +52,14 @@
                 {
                     Name = "Carousel CSS",
                     Method = RequestMethod.GET,
-                    UrlRegex = "home/css/.+$",
+                    UrlRegex = "/css/.+$",
                     Callable = (request) =>
                                {
-                                   var cssFileName = request.Url.Substring(request.Url.LastIndexOf('/') + 1);
+                                   var cssFileName = request.Url.Substring(startIndex: request.Url.LastIndexOf(value: '/') + 1);
                         var response = new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
-                            ContentAsUTF8 = File.ReadAllText($"../../content/css/{cssFileName}")
+                            ContentAsUTF8 = File.ReadAllText(path: $"../../content/css/{cssFileName}")
                         };
 
                         response.Header.ContentType = "text/css";
@@ -70,13 +70,13 @@
                 {
                     Name = "Jquery",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"home/jquery/jquery-3.1.1.js$",
+                    UrlRegex = @"/jquery/jquery-3.1.1.js$",
                     Callable = (request) =>
                     {
                         var response = new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
-                            ContentAsUTF8 = File.ReadAllText("../../content/jquery/jquery-3.1.1.js")
+                            ContentAsUTF8 = File.ReadAllText(path: "../../content/jquery/jquery-3.1.1.js")
                         };
 
                         response.Header.ContentType = "application/x-javascript";
@@ -87,13 +87,13 @@
                 {
                     Name = "Bootstrap JS",
                     Method = RequestMethod.GET,
-                    UrlRegex = @"home/bootstrap/js/bootstrap.min.js$",
+                    UrlRegex = @"/bootstrap/js/bootstrap.min.js$",
                     Callable = (request) =>
                     {
                         var response = new HttpResponse()
                         {
                             StatusCode = ResponseStatusCode.OK,
-                            ContentAsUTF8 = File.ReadAllText("../../content/bootstrap/js/bootstrap.min.js")
+                            ContentAsUTF8 = File.ReadAllText(path: "../../content/bootstrap/js/bootstrap.min.js")
                         };
 
                         response.Header.ContentType = "application/x-javascript";

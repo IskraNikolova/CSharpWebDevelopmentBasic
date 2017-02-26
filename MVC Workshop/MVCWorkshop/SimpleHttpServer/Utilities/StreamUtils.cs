@@ -16,8 +16,8 @@
                 nextChar = stream.ReadByte();
                 if (nextChar == '\n') { break; }
                 if (nextChar == '\r') { continue; }
-                if (nextChar == -1) { Thread.Sleep(1); break; };
-                data.Append((char)nextChar);
+                if (nextChar == -1) { Thread.Sleep(millisecondsTimeout: 1); break; };
+                data.Append(value: (char)nextChar);
             }
 
             return data.ToString();
@@ -25,9 +25,9 @@
 
         public static void WriteResponse(Stream stream, HttpResponse response)
         {
-            byte[] responseHeader = Encoding.UTF8.GetBytes(response.ToString());
-            stream.Write(responseHeader, 0, responseHeader.Length);
-            stream.Write(response.Content, 0, response.Content.Length);
+            byte[] responseHeader = Encoding.UTF8.GetBytes(s: response.ToString());
+            stream.Write(buffer: responseHeader, offset: 0, count: responseHeader.Length);
+            stream.Write(buffer: response.Content, offset: 0, count: response.Content.Length);
         }
     }
 }

@@ -21,37 +21,37 @@
             this.Request = request;
             string urlPart = string.Empty;
 
-            var match = Regex.Match(request.Url, this.RouteUrlRegex);
+            var match = Regex.Match(input: request.Url, pattern: this.RouteUrlRegex);
 
             if (match.Groups.Count > 1)
             {
-                urlPart = match.Groups[1].Value;
+                urlPart = match.Groups[groupnum: 1].Value;
             }
             else
             {
                 urlPart = request.Url;
             }        
 
-            urlPart = SanitarizePath(urlPart);
+            urlPart = SanitarizePath(urlPart: urlPart);
 
             if (urlPart.Length > 0)
             {
-                var firstChar = urlPart.ElementAt(0);
+                var firstChar = urlPart.ElementAt(index: 0);
                 if (firstChar == '/' || firstChar == '\\')
                 {
                     urlPart = "." + urlPart;
                 }
             }
 
-            var localPath = Path.Combine(this.BasePath, urlPart);
+            var localPath = Path.Combine(path1: this.BasePath, path2: urlPart);
 
-            if (Directory.Exists(localPath))
+            if (Directory.Exists(path: localPath))
             {
-                return this.HandleDirectory(localPath);
+                return this.HandleDirectory(localPath: localPath);
             }
-            else if (File.Exists(localPath))
+            else if (File.Exists(path: localPath))
             {
-                return this.HandleFile(localPath);
+                return this.HandleFile(localPath: localPath);
             }
             else
             {
@@ -61,24 +61,24 @@
 
         private static string SanitarizePath(string urlPart)
         {
-            urlPart = urlPart.Replace("\\..\\", "\\");
-            urlPart = urlPart.Replace("/../", "/");
-            urlPart = urlPart.Replace("//", "/");
-            urlPart = urlPart.Replace(@"\\", @"\");
-            urlPart = urlPart.Replace(":", "");
-            urlPart = urlPart.Replace("/", Path.DirectorySeparatorChar.ToString());
+            urlPart = urlPart.Replace(oldValue: "\\..\\", newValue: "\\");
+            urlPart = urlPart.Replace(oldValue: "/../", newValue: "/");
+            urlPart = urlPart.Replace(oldValue: "//", newValue: "/");
+            urlPart = urlPart.Replace(oldValue: @"\\", newValue: @"\");
+            urlPart = urlPart.Replace(oldValue: ":", newValue: "");
+            urlPart = urlPart.Replace(oldValue: "/", newValue: Path.DirectorySeparatorChar.ToString());
             return urlPart;
         }
 
         private HttpResponse HandleFile(string localPath)
         {
-            var fileExtension = Path.GetExtension(localPath);
+            var fileExtension = Path.GetExtension(path: localPath);
 
             var response = new HttpResponse();
-            response.Header.ContentType = QuickMimeTypeMapper.GetMimeType(fileExtension);
+            response.Header.ContentType = QuickMimeTypeMapper.GetMimeType(fileExtension: fileExtension);
 
             response.StatusCode = ResponseStatusCode.OK;
-            response.Content = File.ReadAllBytes(localPath);
+            response.Content = File.ReadAllBytes(path: localPath);
             response.Header.ContentLength = response.Content.Length.ToString();
             return response;
         }
@@ -86,23 +86,23 @@
         private HttpResponse HandleDirectory(string localPath)
         {
             var output = new StringBuilder();
-            output.Append($"<h3> Directory: {this.Request.Url} </h3>");
-            output.Append("<ul>");
+            output.Append(value: $"<h3> Directory: {this.Request.Url} </h3>");
+            output.Append(value: "<ul>");
 
-            foreach (var folder in Directory.GetDirectories(localPath).OrderBy(d => d))
+            foreach (var folder in Directory.GetDirectories(path: localPath).OrderBy(keySelector: d => d))
             {
-                var dirInfo = new DirectoryInfo(folder);
-                output.Append(string.Format("<li><a href=\"{0}\">{0}/</a></li>", dirInfo.Name));
+                var dirInfo = new DirectoryInfo(path: folder);
+                output.Append(value: string.Format(format: "<li><a href=\"{0}\">{0}/</a></li>", arg0: dirInfo.Name));
 
             }
 
-            foreach (var entry in Directory.GetFiles(localPath).OrderBy(f => f))
+            foreach (var entry in Directory.GetFiles(path: localPath).OrderBy(keySelector: f => f))
             {
-                var fileInfo = new FileInfo(entry);
-                output.Append(string.Format("<li><a href=\"{0}\">{0}</a></li>", fileInfo.Name));
+                var fileInfo = new FileInfo(fileName: entry);
+                output.Append(value: string.Format(format: "<li><a href=\"{0}\">{0}</a></li>", arg0: fileInfo.Name));
             }
 
-            output.Append("</ul>");
+            output.Append(value: "</ul>");
 
             return new HttpResponse()
             {

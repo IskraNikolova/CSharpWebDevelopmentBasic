@@ -1,8 +1,10 @@
 ﻿namespace SharpStore.Controllers
 {
+    using System.Collections.Generic;
     using SimpleMVC.Attributes.Methods;
     using SimpleMVC.Controllers;
     using SimpleMVC.Interfaces;
+    using ViewModels;
 
     public class HomeController : Controller
     {
@@ -21,15 +23,9 @@
         [HttpGet]
         public IActionResult Products()
         {
+            List<ProductViewModel> views = new List<ProductViewModel>();
             return this.View();
         }
-
-
-        //[HttpPost]
-        //public IActionResult Products(todo)
-        //{
-        //    return this.View();
-        //}
 
         [HttpGet]
         public IActionResult Contacts()

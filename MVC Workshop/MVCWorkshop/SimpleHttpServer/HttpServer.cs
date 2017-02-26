@@ -13,7 +13,7 @@
             this.Port = port;
             this.IsActive = true;
             this.Sessions = new Dictionary<string, HttpSession>();
-            this.Processor = new HttpProcessor(routes, this.Sessions);
+            this.Processor = new HttpProcessor(routes: routes, sessions: this.Sessions);
         }
 
         public IDictionary<string, HttpSession> Sessions { get; set; }
@@ -28,18 +28,18 @@
        
         public void Listen()
         {
-            this.Listener = new TcpListener(IPAddress.Any, this.Port);
+            this.Listener = new TcpListener(localaddr: IPAddress.Any, port: this.Port);
             this.Listener.Start();
             while (this.IsActive)
             {
                 TcpClient client = this.Listener.AcceptTcpClient();
-                Thread thread = new Thread(() =>
+                Thread thread = new Thread(start: () =>
                 {
-                    this.Processor.HandleClient(client);
+                    this.Processor.HandleClient(tcpClient: client);
                 });
 
                 thread.Start();
-                Thread.Sleep(1);
+                Thread.Sleep(millisecondsTimeout: 1);
             }
         }
     }

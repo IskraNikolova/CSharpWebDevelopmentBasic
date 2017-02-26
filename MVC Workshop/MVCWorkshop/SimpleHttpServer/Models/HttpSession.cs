@@ -14,7 +14,7 @@
 
         public string Id { get; set; }
 
-        public string this[string key] => this.parameters[key];
+        public string this[string key] => this.parameters[key: key];
 
         public void Clear()
         {
@@ -23,7 +23,7 @@
 
         public void Add(string key, string value)
         {
-            this.parameters.Add(key, value);
+            this.parameters.Add(key: key, value: value);
         }
     }
 }

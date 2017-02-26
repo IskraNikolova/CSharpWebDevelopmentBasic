@@ -5,7 +5,7 @@
 
     public class QuickMimeTypeMapper
     {
-        private static readonly IDictionary<string, string> mimeMappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
+        private static readonly IDictionary<string, string> mimeMappings = new Dictionary<string, string>(comparer: StringComparer.InvariantCultureIgnoreCase)
         {
             #region Huge list of mime types
             {".323", "text/h323"},
@@ -575,20 +575,20 @@
         {
             if (fileExtension == null)
             {
-                throw new ArgumentNullException("Extension cannot be null");
+                throw new ArgumentNullException(paramName: "Extension cannot be null");
             }
 
-            if (!fileExtension.StartsWith("."))
+            if (!fileExtension.StartsWith(value: "."))
             {
                 fileExtension = "." + fileExtension;
             }
 
-            if (!mimeMappings.ContainsKey(fileExtension))
+            if (!mimeMappings.ContainsKey(key: fileExtension))
             {
                 return "application/octet-stream";
             }
 
-            return mimeMappings[fileExtension];
+            return mimeMappings[key: fileExtension];
         }
     }
 }

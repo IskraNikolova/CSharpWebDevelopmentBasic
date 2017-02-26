@@ -15,7 +15,7 @@
 
         public HttpRequest()
         {
-            this.Header = new Header(HeaderType.HttpRequest);
+            this.Header = new Header(type: HeaderType.HttpRequest);
         }
 
         public override string ToString()

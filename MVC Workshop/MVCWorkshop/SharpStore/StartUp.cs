@@ -7,8 +7,8 @@
     {
         public static void Main()
         {
-            HttpServer server = new HttpServer(8081, RouteTable.Routes);
-            MvcEngine.Run(server, "SharpStore");
+            HttpServer server = new HttpServer(port: 8081, routes: RouteTable.Routes);
+            MvcEngine.Run(server: server, applicationAssemblyName: "SharpStore");
         }
     }
 }
