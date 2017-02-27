@@ -54,11 +54,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\MessageBinding.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Data.cs" />
+    <Compile Include="Data\SharpStoreContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Knife.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="RouteTable.cs" />
+    <Compile Include="Services\KnivesService.cs" />
+    <Compile Include="Services\MessagesService.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="Views\Home\About.cs" />
     <Compile Include="Views\Home\Contacts.cs" />
     <Compile Include="Views\Home\Index.cs" />
@@ -77,10 +85,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpStore.ViewModels\SharpStore.ViewModels.csproj">
-      <Project>{095d43a8-f3fc-4c4b-b627-abf2f58fd8f7}</Project>
-      <Name>SharpStore.ViewModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SimpleHttpServer\SimpleHttpServer.csproj">
       <Project>{9e139539-c272-488a-bfcf-caddf458df9d}</Project>
       <Name>SimpleHttpServer</Name>
@@ -91,7 +95,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BindingModels\" />
     <Folder Include="content\images\" />
   </ItemGroup>
   <ItemGroup>

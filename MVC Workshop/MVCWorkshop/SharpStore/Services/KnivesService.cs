@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Data;
+    using Models;
     using ViewModels;
 
     public class KnivesService
@@ -14,14 +15,14 @@
             this.context = context;
         }
 
-        public IEnumerable<ProductViewModel> GetProduct()
+        public IEnumerable<ProductViewModel> GetProducts()
         {
-            var knives = this.context.Knives.ToArray(); 
-            var productViewModel = new List<ProductViewModel>();
+            var knives = this.context.Knives.ToArray();
+            var productViewModels = new List<ProductViewModel>();
 
             foreach (var knife in knives)
             {
-                productViewModel.Add(new ProductViewModel()
+                productViewModels.Add(new ProductViewModel()
                 {
                     Id = knife.Id,
                     Name = knife.Name,
@@ -30,7 +31,7 @@
                 });
             }
 
-            return productViewModel;
+            return productViewModels;
         }
     }
 }

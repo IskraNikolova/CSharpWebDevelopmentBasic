@@ -53,9 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpStore.Data\SharpStore.Data.csproj">
-      <Project>{1347c272-3972-4d8b-ba65-483d7056a2e1}</Project>
-      <Name>SharpStore.Data</Name>
+    <ProjectReference Include="..\SharpStore.ViewModels\SharpStore.ViewModels.csproj">
+      <Project>{095d43a8-f3fc-4c4b-b627-abf2f58fd8f7}</Project>
+      <Name>SharpStore.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpStore\SharpStore.csproj">
       <Project>{5499146e-765e-4c85-8299-88817b281585}</Project>
