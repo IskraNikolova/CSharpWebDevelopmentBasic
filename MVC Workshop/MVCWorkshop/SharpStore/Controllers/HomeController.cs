@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using BindingModels;
-    using Models;
     using Services;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
@@ -26,10 +25,11 @@
         }
 
         [HttpGet]
-        public IActionResult<IEnumerable<ProductViewModel>> Products()
+        public IActionResult<IEnumerable<ProductViewModel>> Products(string productName)
         {
             KnivesService services = new KnivesService(Data.Data.Context);
-            IEnumerable<ProductViewModel> views = services.GetProducts();
+            IEnumerable<ProductViewModel> views = services.GetProducts(productName);
+
             return this.View(views);
         }
 
@@ -51,6 +51,21 @@
 
             MessagesService service = new MessagesService(Data.Data.Context);
             service.AddMessageFromBind(messageBindingModel);
+
+            return this.View("Home", "Index");
+        }
+
+        [HttpGet]
+        public IActionResult Buy()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Buy(BuyerBindingModel model)
+        {
+            BuyerService service = new BuyerService(Data.Data.Context);
+            service.AddPurchase(model);
 
             return this.View("Home", "Index");
         }

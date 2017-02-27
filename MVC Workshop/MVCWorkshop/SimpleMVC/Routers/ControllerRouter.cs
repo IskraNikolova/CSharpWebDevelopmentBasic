@@ -81,16 +81,16 @@
 
         public void ParseInput()
         {
-            string uri = WebUtility.UrlDecode(encodedValue: this.request.Url);
+            string uri = WebUtility.UrlDecode(this.request.Url);
             string query = string.Empty;
-            if (this.request.Url.Contains(value: "?"))
+            if (this.request.Url.Contains("?"))
             {
                 query = this.request.Url.Split('?')[1];
             }
 
             this.controllerActionParams = uri.Split('?');
             this.controllerAction = this.controllerActionParams[0]
-                .Split(separator: new char[] { '/' }, options: StringSplitOptions.RemoveEmptyEntries);
+                .Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             this.controllerActionParams = query.Split('&');
 
             //Retrieve GET parameters
@@ -98,23 +98,23 @@
             {
                 foreach (var pair in this.controllerActionParams)
                 {
-                    if (pair.Contains(value: "="))
+                    if (pair.Contains("="))
                     {
                         string[] keyValue = pair.Split('=');
-                        this.getParams.Add(key: keyValue[0], value: keyValue[1]);
+                        this.getParams.Add(keyValue[0], keyValue[1]);
                     }
                 }
             }
 
             //Retrieve POST parameters
-            string postParameters = WebUtility.UrlDecode(encodedValue: this.request.Content);
+            string postParameters = WebUtility.UrlDecode(this.request.Content);
             if (postParameters != null)
             {
                 string[] pairs = postParameters.Split('&');
                 foreach (var pair in pairs)
                 {
                     string[] keyValue = pair.Split('=');
-                    this.postParams.Add(key: keyValue[0], value: keyValue[1]);
+                    this.postParams.Add(keyValue[0], keyValue[1]);
                 }
             }
 
@@ -126,7 +126,7 @@
 
             if (method == null)
             {
-                throw new NotSupportedException(message: "No such method");
+                throw new NotSupportedException("No such method");
             }
 
             IEnumerable<ParameterInfo> parameters
@@ -141,10 +141,10 @@
             {
                 if (param.ParameterType.IsPrimitive || param.ParameterType.Name == "String")
                 {
-                    object value = this.getParams[key: param.Name];
+                    object value = this.getParams[param.Name];
                     this.methodParams[index] = Convert.ChangeType(
-                        value: value,
-                        conversionType: param.ParameterType
+                        value,
+                        param.ParameterType
                         );
                     index++;
                 }
@@ -184,8 +184,8 @@
                     }
 
                     this.methodParams[index] = Convert.ChangeType(
-                        value: bindingModel,
-                        conversionType: bindingModelType
+                        bindingModel,
+                        bindingModelType
                         );
                     index++;
                 }
@@ -196,7 +196,7 @@
             var results = this.GetController()
                 .GetType()
                 .GetMethods()
-                .Where(predicate: m => m.Name == this.actionName);
+                .Where(m => m.Name == this.actionName);
 
             return results;
         }
@@ -211,7 +211,7 @@
                                                       
             var controller =
                 (Controller)Activator
-                .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(name: controllerType));
+                .CreateInstance(MvcContext.Current.ApplicationAssembly.GetType(controllerType));
 
             return controller;
         }

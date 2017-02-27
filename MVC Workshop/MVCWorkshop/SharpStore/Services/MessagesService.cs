@@ -4,13 +4,11 @@
     using Data;
     using Models;
 
-    public class MessagesService
+    public class MessagesService : Service
     {
-        private SharpStoreContext context;
-
-        public MessagesService(SharpStoreContext context)
+        public MessagesService(SharpStoreContext context) 
+            : base(context)
         {
-            this.context = context;
         }
 
         public void AddMessageFromBind(MessageBinding messageBindingModel)

@@ -6,18 +6,19 @@
     using Models;
     using ViewModels;
 
-    public class KnivesService
+    public class KnivesService : Service
     {
-        private readonly SharpStoreContext context;
-
-        public KnivesService(SharpStoreContext context)
+        public KnivesService(SharpStoreContext context) 
+            : base(context)
         {
-            this.context = context;
         }
 
-        public IEnumerable<ProductViewModel> GetProducts()
+        public IEnumerable<ProductViewModel> GetProducts(string productName)
         {
-            var knives = this.context.Knives.ToArray();
+            var knives = context.Knives
+                .Where(kn => kn.Name.Contains(productName))
+                .ToArray();
+
             var productViewModels = new List<ProductViewModel>();
 
             foreach (var knife in knives)

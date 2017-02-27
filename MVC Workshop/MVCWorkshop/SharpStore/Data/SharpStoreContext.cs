@@ -15,5 +15,7 @@ namespace SharpStore.Data
          public virtual DbSet<Knife> Knives { get; set; }
 
          public virtual DbSet<Message> Messages { get; set; }
+
+         public virtual DbSet<Purchase> Purchases { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-namespace SharpStore.Data.Migrations
+namespace SharpStore.Migrations
 {
     using System.Data.Entity.Migrations;
+    using Data;
     using Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<SharpStoreContext>
