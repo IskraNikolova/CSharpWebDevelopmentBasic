@@ -17,12 +17,10 @@
     public class HomeController : Controller
     {
         private readonly IDeletableEntityRepository<Session> sessions;
-        private readonly IDeletableEntityRepository<User> users;
         private readonly SignInManager signInManager;
 
         public HomeController()
         {
-            this.users = new DeletableEntityRepository<User>(ShouterContext.Create());
             this.sessions = new DeletableEntityRepository<Session>(ShouterContext.Create());
             this.signInManager = new SignInManager(this.sessions);
         }
@@ -55,7 +53,6 @@
                                    .First(s => s.SessionId == session.Id)
                                    .User;                  
                       
-
                 var viewModel = new SignedViewModel()
                 {
                     Username = user.Email

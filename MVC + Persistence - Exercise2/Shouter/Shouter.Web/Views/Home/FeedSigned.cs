@@ -13,12 +13,9 @@
         public string Render()
         {
             string template = File.ReadAllText("../../Content/feed-signed.html");
-            StringBuilder builder = new StringBuilder();
-            builder.Append(this.Model);
-            var format = string.Format(template, this.Model.ToString());
+            //var format = string.Format(template, this.Model);
 
-            return format;
+            return template;
         }
-
     }
 }
