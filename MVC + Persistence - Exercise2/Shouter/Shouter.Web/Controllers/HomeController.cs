@@ -1,11 +1,32 @@
 ﻿namespace Shouter.Web.Controllers
 {
+    using System.Linq;
+    using System.Security.Cryptography;
+    using Data;
+    using Data.Common.Repository;
+    using Data.Models;
+    using Models;
+    using Security;
+    using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
     using SimpleMVC.Controllers;
     using SimpleMVC.Interfaces;
+    using SimpleMVC.Interfaces.Generic;
+    using ViewModels;
 
     public class HomeController : Controller
     {
+        private readonly IDeletableEntityRepository<Session> sessions;
+        private readonly IDeletableEntityRepository<User> users;
+        private readonly SignInManager signInManager;
+
+        public HomeController()
+        {
+            this.users = new DeletableEntityRepository<User>(ShouterContext.Create());
+            this.sessions = new DeletableEntityRepository<Session>(ShouterContext.Create());
+            this.signInManager = new SignInManager(this.sessions);
+        }
+
         [HttpGet]
         public IActionResult Feed()
         {
@@ -16,6 +37,32 @@
         public IActionResult Index()
         {
             return this.View();
+        }
+
+
+        [HttpGet]
+        public IActionResult<SignedViewModel> FeedSigned(HttpSession session)
+        {
+            if (!this.signInManager.IsAuthenticated(session))
+            {
+                this.Redirect(new HttpResponse(), "/home/index");
+            }
+
+            using (this.sessions)
+            {
+                var user = this.sessions
+                                   .All()
+                                   .First(s => s.SessionId == session.Id)
+                                   .User;                  
+                      
+
+                var viewModel = new SignedViewModel()
+                {
+                    Username = user.Email
+                };
+
+                return this.View(viewModel);
+            }
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿namespace Shouter.Web.Controllers
 {
-    using System.Data.Entity;
+    using System.Linq;
     using Data;
     using Data.Common.Repository;
     using Data.Models;
     using Models;
+    using Security;
+    using Services;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
     using SimpleMVC.Controllers;
@@ -12,13 +14,13 @@
 
     public class UsersController : Controller
     {
-        private readonly IDeletableEntityRepository<User> users;
         private readonly IDeletableEntityRepository<Session> sessions;
+        private readonly SignInManager signInManger;
 
         public UsersController()
         {
-            this.users = new DeletableEntityRepository<User>(new ShouterContext());
-            this.sessions = new DeletableEntityRepository<Session>(new ShouterContext());
+            this.sessions = new DeletableEntityRepository<Session>(ShouterContext.Create());
+            this.signInManger = new SignInManager(this.sessions);
         }
 
         [HttpGet]
@@ -36,14 +38,50 @@
                 this.Redirect(response, "/users/register");
             }
 
-            User userEntity = new User()
-            {
-                Email = model.Email,
-                Password = model.Password
-            };
+           RegisterServices service = new RegisterServices();
+           service.RegisterUser(model);
 
-            this.users.Add(userEntity);
-            this.users.SaveChanges();
+            this.Redirect(response, "/home/feedSigned");
+            return null;
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model,
+                                    HttpSession session,
+                                    HttpResponse response)
+        {
+            var loginServices = new LoginServices();
+
+            var currentUser = loginServices
+                .GetUser(model, session, response);
+
+            var isAuthenticated = this.signInManger
+                .IsAuthenticated(session);
+
+            if (currentUser != null && !isAuthenticated)
+            {              
+                loginServices.AddSession(session, currentUser.Id);
+                this.Redirect(response, "/home/feedSigned");
+            }
+
+            if (isAuthenticated)
+            {
+                this.Redirect(response, "/home/feedSigned");
+            }
+
+            return this.View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout(HttpSession session, HttpResponse response)
+        {
+            this.signInManger.Logout(response, session.Id);
 
             this.Redirect(response, "/home/index");
             return null;
