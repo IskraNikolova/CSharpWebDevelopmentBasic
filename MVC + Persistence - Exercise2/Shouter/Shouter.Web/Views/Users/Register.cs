@@ -1,7 +1,8 @@
-﻿namespace Shouter.Web.Views.Home
+﻿namespace Shouter.Web.Views.Users
 {
     using System.IO;
     using SimpleMVC.Interfaces;
+
     public class Register : IRenderable
     {
         public string Render()

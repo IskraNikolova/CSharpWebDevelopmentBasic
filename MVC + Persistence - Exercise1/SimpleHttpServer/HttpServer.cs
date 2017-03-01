@@ -31,7 +31,7 @@ namespace SimpleHttpServer
             this.Listener.Start();
             while (this.IsActive)
             {
-                 TcpClient client = this.Listener.AcceptTcpClient();
+                TcpClient client = this.Listener.AcceptTcpClient();
                 Thread thread = new Thread(() =>
                 {
                     new HttpProcessor(Routes, new Dictionary<string, HttpSession>()).HandleClient(client);
