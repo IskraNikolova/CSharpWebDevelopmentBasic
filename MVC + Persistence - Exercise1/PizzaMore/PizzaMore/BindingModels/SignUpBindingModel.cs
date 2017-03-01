@@ -1,9 +1,6 @@
 ﻿namespace PizzaMore.BindingModels
 {
-    public class SignUpBindingModel
+    public class SignUpBindingModel : BindingUserModel
     {
-        public string Email { get; set; }
-
-        public string Password { get; set; }
     }
 }

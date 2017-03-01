@@ -1,7 +1,9 @@
 ﻿namespace PizzaMore.Security
 {
+    using System;
     using System.Linq;
     using Data;
+    using Models;
     using SimpleHttpServer.Models;
 
     public class SignInManager
@@ -15,7 +17,28 @@
 
         public bool IsAuthenticated(HttpSession session)
         {
-            return this.context.Sessions.Any(s => s.SessionId == session.Id && s.IsActive);
+            var isAuth = this.context
+                              .Sessions
+                              .Any(s => s.SessionId == session.Id && s.IsActive);
+            return isAuth;
+
+        }
+
+        public void Logout(HttpSession httpSession)
+        {
+            using (this.context)
+            {
+                Session session = this.context
+                    .Sessions
+                    .FirstOrDefault(s => s.SessionId == httpSession.Id);
+
+                if (session != null)
+                {
+                    session.IsActive = false;
+                    httpSession.Id = new Random().Next().ToString();
+                    this.context.SaveChanges();
+                }
+            }
         }
     }
 }

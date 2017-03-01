@@ -1,7 +1,6 @@
 ﻿namespace PizzaMore.Controllers
 {
     using Data;
-    using Models;
     using Security;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;

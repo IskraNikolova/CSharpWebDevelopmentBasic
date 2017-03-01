@@ -6,31 +6,28 @@
     using Models;
     using SimpleHttpServer.Models;
 
-    public class SignInServices : Service
+    public class SignInServices
     {
-        public SignInServices(PizzaStoreContext context)
-            : base(context)
-        {
-        }
-
         public void SignIn(SignInBindingModel model, HttpSession session)
         {
-            User user = this.context
-                .Users
-                .First(u => (u.Email == model.Email && u.Password == model.Password));
-
-            if (user != null)
+            using (var context = Data.Context)
             {
+                User user = context
+                        .Users
+                        .First(u => (u.Email == model.Email && u.Password == model.Password));
 
-                Session sessionEntity = new Session()
+                if (user != null)
                 {
-                    SessionId = session.Id,
-                    IsActive = true,
-                    User = user
-                };
+                    Session sessionEntity = new Session()
+                    {
+                        SessionId = session.Id,
+                        IsActive = true,
+                        UserId = user.Id
+                    };
 
-                this.context.Sessions.Add(sessionEntity);
-                this.context.SaveChanges();
+                    context.Sessions.Add(sessionEntity);
+                    context.SaveChanges();
+                }
             }
         }
     }
