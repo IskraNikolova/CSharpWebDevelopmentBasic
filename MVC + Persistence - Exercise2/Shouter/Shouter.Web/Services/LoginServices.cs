@@ -1,10 +1,10 @@
 ﻿namespace Shouter.Web.Services
 {
     using System.Linq;
+    using BindingModels;
     using Data;
     using Data.Common.Repository;
     using Data.Models;
-    using Models;
     using SimpleHttpServer.Models;
 
     public class LoginServices
@@ -19,7 +19,7 @@
         }
 
 
-        public User GetUser(LoginViewModel model,
+        public User GetUser(LoginBindingModel model,
                                     HttpSession session,
                                     HttpResponse response)
         {

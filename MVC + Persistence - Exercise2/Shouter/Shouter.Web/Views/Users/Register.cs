@@ -7,7 +7,7 @@
     {
         public string Render()
         {
-            return File.ReadAllText("../../Content/register.html");
-;        }
+            return File.ReadAllText(Constants.ContantPath + "register.html");
+        }
     }
 }

@@ -6,7 +6,7 @@
     {
         public string Render()
         {
-            return File.ReadAllText("../../Content/login.html");
+            return File.ReadAllText(Constants.ContantPath + "login.html");
         }
     }
 }

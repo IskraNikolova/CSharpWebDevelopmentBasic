@@ -63,11 +63,12 @@
   <ItemGroup>
     <Compile Include="App_Star\NinjectWebKernel.cs" />
     <Compile Include="App_Star\RouteConfig.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Models\DisplayViewModel.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="BindingModels\DisplayBindingModel.cs" />
+    <Compile Include="BindingModels\LoginBindingModel.cs" />
+    <Compile Include="BindingModels\RegisterBindingModel.cs" />
     <Compile Include="Security\SignInManager.cs" />
     <Compile Include="Services\LoginServices.cs" />
     <Compile Include="Services\RegisterServices.cs" />
@@ -116,7 +117,9 @@
     <Content Include="Content\register.html" />
     <Content Include="Content\template.html" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\images\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SimpleHttpServer\SimpleHttpServer.csproj">
       <Project>{9e139539-c272-488a-bfcf-caddf458df9d}</Project>

@@ -1,10 +1,9 @@
 ﻿namespace Shouter.Web.Controllers
 {
-    using System.Linq;
+    using BindingModels;
     using Data;
     using Data.Common.Repository;
     using Data.Models;
-    using Models;
     using Security;
     using Services;
     using SimpleHttpServer.Models;
@@ -31,14 +30,11 @@
 
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model, HttpResponse response)
+        public IActionResult Register(RegisterBindingModel model, HttpResponse response)
         {
-            if (model.Password != model.ConfirmPassword)
-            {
-                this.Redirect(response, "/users/register");
-            }
+            RegisterServices service = new RegisterServices();
+            service.IsModelValid(model);
 
-           RegisterServices service = new RegisterServices();
            service.RegisterUser(model);
 
             this.Redirect(response, "/home/index");
@@ -52,7 +48,7 @@
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model,
+        public IActionResult Login(LoginBindingModel model,
                                     HttpSession session,
                                     HttpResponse response)
         {

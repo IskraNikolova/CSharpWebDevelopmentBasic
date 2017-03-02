@@ -10,13 +10,13 @@ namespace Shouter.Data
     public class ShouterContext : DbContext
     {
         public ShouterContext()
-            : base("name=ShouterContext")
+            : base("ShouterContext")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShouterContext, Configuration>());
         }
         public static ShouterContext Create()
         {
-            return new ShouterContext();
+            return new ShouterContext();//TODO
         }
 
         public override int SaveChanges()

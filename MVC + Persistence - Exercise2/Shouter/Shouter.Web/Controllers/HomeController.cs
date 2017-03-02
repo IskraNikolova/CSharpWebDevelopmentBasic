@@ -1,11 +1,9 @@
 ﻿namespace Shouter.Web.Controllers
 {
     using System.Linq;
-    using System.Security.Cryptography;
     using Data;
     using Data.Common.Repository;
     using Data.Models;
-    using Models;
     using Security;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;

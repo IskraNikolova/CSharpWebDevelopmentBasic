@@ -6,7 +6,7 @@
     {
         public string Render()
         {
-            return File.ReadAllText("../../Content/feed.html");
+            return File.ReadAllText(Constants.ContantPath + "feed.html");
         }
     }
 }

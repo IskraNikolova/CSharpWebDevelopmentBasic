@@ -1,10 +1,10 @@
-﻿namespace Shouter.Web.Models
+﻿namespace Shouter.Web.BindingModels
 {
     using Data.Models;
     using Infrastucture.Mapping;
     using Microsoft.Build.Framework;
 
-    public class DisplayViewModel : IMapFrom<User>
+    public class DisplayBindingModel : IMapFrom<User>
     {
         [Required]
         public string Email { get; set; }

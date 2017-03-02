@@ -1,11 +1,11 @@
-﻿namespace Shouter.Web.Models
+﻿namespace Shouter.Web.BindingModels
 {
     using System;
     using Data.Models;
     using Infrastucture.Mapping;
     using Microsoft.Build.Framework;
 
-    public class RegisterViewModel : IMapFrom<User>
+    public class LoginBindingModel : IMapFrom<User>
     {
         [Required]
         public string Username { get; set; }

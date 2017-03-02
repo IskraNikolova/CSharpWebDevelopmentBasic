@@ -9,7 +9,7 @@
 
         public string Render()
         {
-            string template = File.ReadAllText("../../Content/feed-signed.html");
+            string template = File.ReadAllText(Constants.ContantPath + "feed-signed.html");
             var format = string.Format(template, this.Model);
 
             return format;
