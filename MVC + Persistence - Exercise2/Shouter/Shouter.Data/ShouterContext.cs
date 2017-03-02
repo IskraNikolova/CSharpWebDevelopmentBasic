@@ -4,6 +4,7 @@ namespace Shouter.Data
     using System.Data.Entity;
     using System.Linq;
     using Common.Models;
+    using Migrations;
     using Models;
 
     public class ShouterContext : DbContext
@@ -11,6 +12,7 @@ namespace Shouter.Data
         public ShouterContext()
             : base("name=ShouterContext")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShouterContext, Configuration>());
         }
         public static ShouterContext Create()
         {

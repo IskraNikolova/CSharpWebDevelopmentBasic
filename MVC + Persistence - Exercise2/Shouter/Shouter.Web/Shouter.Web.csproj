@@ -103,6 +103,7 @@
     <Content Include="Content\bootstrap\js\npm.js" />
     <Content Include="Content\contacts.html" />
     <Content Include="Content\css\carousel.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\feed-signed.html" />
     <Content Include="Content\feed.html" />
     <Content Include="Content\followers.html" />
@@ -117,11 +118,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MVC + Persistence - Exercise1\SimpleHttpServer\SimpleHttpServer.csproj">
+    <ProjectReference Include="..\..\SimpleHttpServer\SimpleHttpServer.csproj">
       <Project>{9e139539-c272-488a-bfcf-caddf458df9d}</Project>
       <Name>SimpleHttpServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MVC + Persistence - Exercise1\SimpleMVC\SimpleMVC.csproj">
+    <ProjectReference Include="..\..\SimpleMVC\SimpleMVC.csproj">
       <Project>{f2ef3059-aa6c-45c8-9dbb-9d36e62af1b8}</Project>
       <Name>SimpleMVC</Name>
     </ProjectReference>

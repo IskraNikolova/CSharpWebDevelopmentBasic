@@ -40,7 +40,7 @@
                     {
                         var response = new HttpResponse()
                         {
-                            StatusCode = ResponseStatusCode.OK,
+                            StatusCode = ResponseStatusCode.Ok,
                             ContentAsUTF8 = File.ReadAllText(path: "../../content/bootstrap/css/bootstrap.min.css")
                         };
 
@@ -58,7 +58,7 @@
                                    var cssFileName = request.Url.Substring(startIndex: request.Url.LastIndexOf(value: '/') + 1);
                         var response = new HttpResponse()
                         {
-                            StatusCode = ResponseStatusCode.OK,
+                            StatusCode = ResponseStatusCode.Ok,
                             ContentAsUTF8 = File.ReadAllText(path: $"../../content/css/{cssFileName}")
                         };
 
@@ -75,7 +75,7 @@
                     {
                         var response = new HttpResponse()
                         {
-                            StatusCode = ResponseStatusCode.OK,
+                            StatusCode = ResponseStatusCode.Ok,
                             ContentAsUTF8 = File.ReadAllText(path: "../../content/jquery/jquery-3.1.1.js")
                         };
 
@@ -92,7 +92,7 @@
                     {
                         var response = new HttpResponse()
                         {
-                            StatusCode = ResponseStatusCode.OK,
+                            StatusCode = ResponseStatusCode.Ok,
                             ContentAsUTF8 = File.ReadAllText(path: "../../content/bootstrap/js/bootstrap.min.js")
                         };
 

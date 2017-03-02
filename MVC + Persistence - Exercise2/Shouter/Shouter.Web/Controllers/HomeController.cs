@@ -50,15 +50,19 @@
             {
                 var user = this.sessions
                                    .All()
-                                   .First(s => s.SessionId == session.Id)
-                                   .User;                  
-                      
-                var viewModel = new SignedViewModel()
+                                   .FirstOrDefault(s => s.SessionId == session.Id)
+                                   .User;
+                if (user != null)
                 {
-                    Username = user.Email
-                };
+                    var viewModel = new SignedViewModel()
+                    {
+                        Username = user.Email
+                    };
 
-                return this.View(viewModel);
+                    return this.View(viewModel);
+                }
+
+                return null;
             }
         }
     }

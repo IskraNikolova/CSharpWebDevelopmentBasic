@@ -41,7 +41,7 @@
            RegisterServices service = new RegisterServices();
            service.RegisterUser(model);
 
-            this.Redirect(response, "/home/feedSigned");
+            this.Redirect(response, "/home/index");
             return null;
         }
 
