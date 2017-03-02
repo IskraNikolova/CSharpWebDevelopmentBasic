@@ -1,32 +1,42 @@
 ﻿namespace Shouter.Web.Security
 {
     using System.Linq;
-    using Data;
     using Data.Common.Repository;
     using Data.Models;
     using SimpleHttpServer.Models;
     using SimpleHttpServer.Utilities;
 
-    public class SignInManager
+    public class AuthenticationManager
     {
-         private readonly IDeletableEntityRepository<Session> sessions;
+         private readonly  IDeletableEntityRepository<Session> sessions;
 
-        public SignInManager(IDeletableEntityRepository<Session> context)
+        public AuthenticationManager(IDeletableEntityRepository<Session> context)
         {
             this.sessions = context;
         }
 
-        public bool IsAuthenticated(HttpSession session)
+        public bool IsAuthenticated(string sessionId)
         {
             bool isAuthenticated = this.sessions.All()
-                .Any(s => s.SessionId == session.Id && s.IsActive);
+                .Any(s => s.SessionId == sessionId && s.IsActive);
 
             return isAuthenticated;
         }
 
+        public User GetAuthenticationUser(string sessionId)
+        {
+            User user = this.sessions
+                .All()
+               .FirstOrDefault(s => s.SessionId == sessionId && s.IsActive)
+               .User;
+
+            return user;
+        }
+
         public void Logout(HttpResponse response, string sessionId)
         {
-            Session sessionEntity = this.sessions.All()
+            Session sessionEntity = this.sessions
+                .All()
                 .FirstOrDefault(s => s.SessionId == sessionId);
 
             sessionEntity.IsActive = false;

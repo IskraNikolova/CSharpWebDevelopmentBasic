@@ -3,7 +3,7 @@
     using System.IO;
     using SimpleMVC.Interfaces.Generic;
     using ViewModels;
-    public class FeedSigned : IRenderable<SignedViewModel>
+    public class Signed : IRenderable<SignedViewModel>
     {
         public SignedViewModel Model { get; set; }
 

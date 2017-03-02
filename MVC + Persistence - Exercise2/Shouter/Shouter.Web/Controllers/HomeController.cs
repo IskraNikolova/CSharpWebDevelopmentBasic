@@ -15,12 +15,12 @@
     public class HomeController : Controller
     {
         private readonly IDeletableEntityRepository<Session> sessions;
-        private readonly SignInManager signInManager;
+        private readonly AuthenticationManager authenticationManager;
 
         public HomeController()
         {
             this.sessions = new DeletableEntityRepository<Session>(ShouterContext.Create());
-            this.signInManager = new SignInManager(this.sessions);
+            this.authenticationManager = new AuthenticationManager(this.sessions);
         }
 
         [HttpGet]
@@ -37,11 +37,11 @@
 
 
         [HttpGet]
-        public IActionResult<SignedViewModel> FeedSigned(HttpSession session)
+        public IActionResult<SignedViewModel> Signed(HttpSession session, HttpResponse response)
         {
-            if (!this.signInManager.IsAuthenticated(session))
+            if (!this.authenticationManager.IsAuthenticated(session.Id))
             {
-                this.Redirect(new HttpResponse(), "/home/index");
+                this.Redirect(response, "/home/index");
             }
 
             using (this.sessions)

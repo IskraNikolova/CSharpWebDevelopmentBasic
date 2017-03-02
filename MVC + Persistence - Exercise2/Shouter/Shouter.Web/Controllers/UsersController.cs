@@ -14,17 +14,23 @@
     public class UsersController : Controller
     {
         private readonly IDeletableEntityRepository<Session> sessions;
-        private readonly SignInManager signInManger;
+        private readonly AuthenticationManager authenticationManger;
 
         public UsersController()
         {
             this.sessions = new DeletableEntityRepository<Session>(ShouterContext.Create());
-            this.signInManger = new SignInManager(this.sessions);
+            this.authenticationManger = new AuthenticationManager(this.sessions);
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Register(HttpResponse response, HttpSession session)
         {
+            if (this.authenticationManger.IsAuthenticated(session.Id))
+            {
+                this.Redirect(response, "home/signed");
+                return null;
+            }
+
             return this.View();
         }
 
@@ -48,8 +54,14 @@
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(HttpResponse response, HttpSession session)
         {
+            if (this.authenticationManger.IsAuthenticated(session.Id))
+            {
+                this.Redirect(response, "home/signed");
+                return null;
+            }
+
             return this.View();
         }
 
@@ -69,19 +81,18 @@
                 var logginUser = loginServices.GetUserOfLoginBind(model);
                 loginServices.LoginUser(logginUser, session);
 
-                this.Redirect(response, "/home/feedSigned");
+                this.Redirect(response, "/home/signed");
             }
 
             return null;
         }
 
         [HttpGet]
-        public IActionResult Logout(HttpSession session, HttpResponse response)
+        public void Logout(HttpSession session, HttpResponse response)
         {
-            this.signInManger.Logout(response, session.Id);
+            this.authenticationManger.Logout(response, session.Id);
 
             this.Redirect(response, "/home/index");
-            return null;
         }
     }
 }

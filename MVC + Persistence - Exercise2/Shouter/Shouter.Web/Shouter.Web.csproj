@@ -69,14 +69,14 @@
     <Compile Include="BindingModels\DisplayBindingModel.cs" />
     <Compile Include="BindingModels\LoginBindingModel.cs" />
     <Compile Include="BindingModels\RegisterBindingModel.cs" />
-    <Compile Include="Security\SignInManager.cs" />
+    <Compile Include="Security\AuthenticationManager.cs" />
     <Compile Include="Services\LoginServices.cs" />
     <Compile Include="Services\RegisterServices.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SignedViewModel.cs" />
     <Compile Include="Views\Home\Feed.cs" />
-    <Compile Include="Views\Home\FeedSigned.cs" />
+    <Compile Include="Views\Home\Signed.cs" />
     <Compile Include="Views\Home\Index.cs" />
     <Compile Include="Views\Users\Login.cs" />
     <Compile Include="Views\Users\Register.cs" />
