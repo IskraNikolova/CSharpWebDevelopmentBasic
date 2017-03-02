@@ -27,6 +27,8 @@
 
         public DateTime? BirthDate { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

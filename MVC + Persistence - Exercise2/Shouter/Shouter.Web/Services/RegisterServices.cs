@@ -1,5 +1,6 @@
 ﻿namespace Shouter.Web.Services
 {
+    using System.Linq;
     using System.Text.RegularExpressions;
     using BindingModels;
     using Data;
@@ -10,10 +11,15 @@
     {
         private readonly IDeletableEntityRepository<User> users;
 
-        public bool IsModelValid(RegisterBindingModel model)
+        public RegisterServices()
+        {
+            this.users = new DeletableEntityRepository<User>(ShouterContext.Create());
+        }
+
+        public bool IsRegisterModelValid(RegisterBindingModel model)
         {
             //todo validation
-            Regex regex = new Regex("^[a-z0-9]+$");
+            Regex regex = new Regex("^[\\w]+$");
             if (!regex.IsMatch(model.Username))
             {
                 return false;
@@ -21,30 +27,34 @@
 
             if (model.Password != model.ConfirmPassword)
             {
-                return false;             
+                return false;
             }
 
             return true;
         }
 
-        public RegisterServices()
-        {
-            this.users = new DeletableEntityRepository<User>(ShouterContext.Create());
-        }
-
-        public void RegisterUser(RegisterBindingModel model)
+        public User GetUserOfRegisterBind(RegisterBindingModel model)
         {
             User userEntity = new User()
             {
+                Username = model.Username,
                 Email = model.Email,
-                Password = model.Password
+                Password = model.Password,
+                BirthDate = model.BirthDate
             };
 
-            using (this.users)
+            return userEntity;
+        }
+
+        public void RegisterUser(User userEntity)
+        {
+            if (!this.users.All().Any())
             {
-                this.users.Add(userEntity);
-                this.users.SaveChanges();
+                userEntity.IsAdmin = true;
             }
+
+            this.users.Add(userEntity);
+            this.users.SaveChanges();
         }
     }
 }

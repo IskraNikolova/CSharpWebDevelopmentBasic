@@ -2,6 +2,6 @@
 {
     public class Constants
     {
-        public const string ContantPath = "../../Contant/";
+        public const string ContantPath = "../../Content/";
     }
 }

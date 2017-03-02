@@ -32,12 +32,18 @@
         [HttpPost]
         public IActionResult Register(RegisterBindingModel model, HttpResponse response)
         {
-            RegisterServices service = new RegisterServices();
-            service.IsModelValid(model);
+            var service = new RegisterServices();
+            if (!service.IsRegisterModelValid(model))
+            {
+                this.Redirect(response, "/users/register");
+            }
+            else
+            {
+                var user = service.GetUserOfRegisterBind(model);
+                service.RegisterUser(user);
+                this.Redirect(response, "/users/login");
+            }
 
-           service.RegisterUser(model);
-
-            this.Redirect(response, "/home/index");
             return null;
         }
 
@@ -54,24 +60,19 @@
         {
             var loginServices = new LoginServices();
 
-            var currentUser = loginServices
-                .GetUser(model, session, response);
-
-            var isAuthenticated = this.signInManger
-                .IsAuthenticated(session);
-
-            if (currentUser != null && !isAuthenticated)
-            {              
-                loginServices.AddSession(session, currentUser.Id);
-                this.Redirect(response, "/home/feedSigned");
-            }
-
-            if (isAuthenticated)
+            if (!loginServices.IsLoginViewModelValid(model))
             {
+                this.Redirect(response, "/users/login");
+            }
+            else
+            {
+                var logginUser = loginServices.GetUserOfLoginBind(model);
+                loginServices.LoginUser(logginUser, session);
+
                 this.Redirect(response, "/home/feedSigned");
             }
 
-            return this.View();
+            return null;
         }
 
         [HttpGet]

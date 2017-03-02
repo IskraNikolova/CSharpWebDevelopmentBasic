@@ -14,23 +14,23 @@
             {
                 return new Route[]
                 {
-                    new Route()
-                    {
-                        Name = "Favicon",
-                        Method = RequestMethod.GET,
-                        UrlRegex = "/favicon.ico$",
-                        Callable = (request) =>
-                        {
-                            var response = new HttpResponse()
-                            {
-                                StatusCode = ResponseStatusCode.Ok,
-                                Content = File.ReadAllBytes("../../Content/favicon.ico")
-                            };
+                    //new Route()
+                    //{
+                    //    Name = "Favicon",
+                    //    Method = RequestMethod.GET,
+                    //    UrlRegex = "/favicon.ico$",
+                    //    Callable = (request) =>
+                    //    {
+                    //        var response = new HttpResponse()
+                    //        {
+                    //            StatusCode = ResponseStatusCode.Ok,
+                    //            Content = File.ReadAllBytes("../../Content/favicon.ico")
+                    //        };
 
-                            response.Header.ContentType = "image/x-icon";
-                            return response;
-                        }
-                    },
+                    //        response.Header.ContentType = "image/x-icon";
+                    //        return response;
+                    //    }
+                    //},
                     new Route()
                     {
                         Name = "Images",

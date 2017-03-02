@@ -18,32 +18,36 @@
             this.sessions = new DeletableEntityRepository<Session>(ShouterContext.Create());
         }
 
+        public bool IsLoginViewModelValid(LoginBindingModel model)
+        {
+            var cre = model.Credentials;
+            var pass = model.Password;
+            return this.users.All().Any(u => (u.Email == cre ||
+                                             u.Username == cre) &&
+                                             u.Password == pass);
+        }
 
-        public User GetUser(LoginBindingModel model,
-                                    HttpSession session,
-                                    HttpResponse response)
+        public User GetUserOfLoginBind(LoginBindingModel model)
         {
             User currentUser =
                      this.users.All()
-                          .FirstOrDefault(u => u.Password == model.Password &&
-                                          u.Email == model.Email);
+                          .First(u => u.Password == model.Password &&
+                                      (u.Username == model.Credentials ||
+                                      u.Email == model.Credentials));
             return currentUser;
         }
 
-        public void AddSession(HttpSession session, int id)
+        public void LoginUser(User user, HttpSession session)
         {
-            Session sessionEntity = new Session()
+            var sessionEntity = new Session()
             {
                 SessionId = session.Id,
                 IsActive = true,
-                UserId = id
+                UserId = user.Id
             };
 
-            using (this.sessions)
-            {
-                this.sessions.Add(sessionEntity);
-                this.sessions.SaveChanges();
-            }
+            this.sessions.Add(sessionEntity);
+            this.sessions.SaveChanges();
         }
     }
 }
