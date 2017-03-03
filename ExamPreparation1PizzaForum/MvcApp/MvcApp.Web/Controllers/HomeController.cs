@@ -2,8 +2,6 @@
 {
     using System.Linq;
     using Data;
-    using Data.Common.Repository;
-    using Data.Models;
     using Security;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
@@ -14,22 +12,20 @@
 
     public class HomeController : Controller
     {
-        private readonly IDeletableEntityRepository<Session> sessions;
+        private UnitOfWork unit;
         private readonly AuthenticationManager authenticationManager;
 
         public HomeController()
         {
-            this.sessions = new DeletableEntityRepository<Session>(MvcAppContext.Create());
-            this.authenticationManager = new AuthenticationManager(this.sessions);
+            this.unit = new UnitOfWork();
+            this.authenticationManager = new AuthenticationManager(this.unit.Sessions);
         }
-
 
         [HttpGet]
         public IActionResult Index()
         {
             return this.View();
         }
-
 
         [HttpGet]
         public IActionResult<SignedViewModel> Signed(HttpSession session, HttpResponse response)
@@ -39,9 +35,9 @@
                 this.Redirect(response, "/home/index");
             }
 
-            using (this.sessions)
+            using (this.unit.Sessions)
             {
-                var user = this.sessions
+                var user = this.unit.Sessions
                                    .All()
                                    .FirstOrDefault(s => s.SessionId == session.Id)
                                    .User;

@@ -13,15 +13,13 @@
 
     public class ForumController : Controller
     {
-        private readonly IDeletableEntityRepository<Session> sessions;
-        private readonly IDeletableEntityRepository<User> users;
+        private UnitOfWork unit;
         private readonly AuthenticationManager authenticationManger;
 
         public ForumController()
         {
-            this.sessions = new DeletableEntityRepository<Session>(MvcAppContext.Create());
-            this.users = new DeletableEntityRepository<User>(MvcAppContext.Create());
-            this.authenticationManger = new AuthenticationManager(this.sessions);
+            this.unit = new UnitOfWork();
+            this.authenticationManger = new AuthenticationManager(this.unit.Sessions);
         }
 
         [HttpGet]
@@ -72,7 +70,7 @@
                                     HttpSession session,
                                     HttpResponse response)
         {
-            var loginServices = new LoginServices(this.users, this.sessions);
+            var loginServices = new LoginServices(this.unit.Users, this.unit.Sessions);
 
             if (!loginServices.IsLoginViewModelValid(model))
             {

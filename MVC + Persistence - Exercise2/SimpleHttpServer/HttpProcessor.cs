@@ -188,7 +188,7 @@ namespace SimpleHttpServer
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InnerMessage);
                 Console.WriteLine(ex.StackTrace);
                 return HttpResponseBuilder.InternalServerError();
             }

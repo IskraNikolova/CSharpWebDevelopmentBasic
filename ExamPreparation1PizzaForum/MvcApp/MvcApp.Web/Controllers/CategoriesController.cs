@@ -4,21 +4,26 @@
     using Data.Common.Repository;
     using Data.Models;
     using Security;
+    using Services;
     using SimpleHttpServer.Models;
     using SimpleMVC.Controllers;
-    using SimpleMVC.Interfaces;
+    using SimpleMVC.Interfaces.Generic;
+    using ViewModels;
 
     public class CategoriesController : Controller
     {
-        private readonly IDeletableEntityRepository<Session> sessions;
+        private readonly UnitOfWork unit;
         private readonly AuthenticationManager manager;
+        private CategoriesServices service;
 
         public CategoriesController()
         {
-            this.sessions = new DeletableEntityRepository<Session>(MvcAppContext.Create());
-            this.manager = new AuthenticationManager(this.sessions);
+            this.unit = new UnitOfWork();
+            this.manager = new AuthenticationManager(this.unit.Sessions);
+            this.service = new CategoriesServices();
         }
-        public IActionResult All(HttpSession session, HttpResponse response)
+
+        public IActionResult<AllViewModel> All(HttpSession session, HttpResponse response)
         {
             if (!this.manager.IsAuthenticated(session.Id))
             {
@@ -33,7 +38,8 @@
                 return null;
             }
 
-            return this.View();
+            var model = this.service.GetAllViewModel(user, this.unit.Categories);
+            return this.View(model);
         }
     }
 }
