@@ -1,0 +1,32 @@
+﻿namespace MvcApp.Data.Models
+{
+    using System;
+    using System.Collections.Generic;
+    using Common.Models;
+
+    public class Topic : AuditInfo, IDeletableEntity
+    {
+        public Topic()
+        {
+            this.Replies = new HashSet<Reply>();
+        }
+
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public string Content { get; set; }
+
+        public DateTime? PublishDate { get; set; }
+
+        public virtual User Author { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual ICollection<Reply> Replies { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+    }
+}

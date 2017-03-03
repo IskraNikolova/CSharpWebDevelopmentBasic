@@ -29,6 +29,12 @@ namespace MvcApp.Data
 
         public IDbSet<Session> Sessions { get; set; }
 
+        public IDbSet<Category> Categories { get; set; }
+
+        public IDbSet<Reply> Replies { get; set; }
+
+        public IDbSet<Topic> Topics { get; set; }
+
         private void ApplyAuditInfoRules()
         {
             // Approach via @julielerman: http://bit.ly/123661P

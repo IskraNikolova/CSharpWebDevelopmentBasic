@@ -40,7 +40,6 @@
                 Username = model.Username,
                 Email = model.Email,
                 Password = model.Password,
-                BirthDate = model.BirthDate
             };
 
             return userEntity;
