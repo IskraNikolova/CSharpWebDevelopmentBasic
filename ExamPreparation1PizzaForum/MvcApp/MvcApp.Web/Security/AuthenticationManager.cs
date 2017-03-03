@@ -30,11 +30,17 @@
                .FirstOrDefault(s => s.SessionId == sessionId && s.IsActive)
                .User;
 
+            if (user != null)
+            {
+                ViewBag.Bag["username"] = user.Username;
+            }
+
             return user;
         }
 
         public void Logout(HttpResponse response, string sessionId)
         {
+            ViewBag.Bag["username"] = null;
             Session sessionEntity = this.sessions
                 .All()
                 .FirstOrDefault(s => s.SessionId == sessionId);

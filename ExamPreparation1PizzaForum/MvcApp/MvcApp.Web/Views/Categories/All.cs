@@ -13,7 +13,7 @@
         {
             string header = File.ReadAllText(Constants.ContentPath + Constants.Header);
             string navigation = File.ReadAllText(Constants.ContentPath + Constants.NavLogged);
-            navigation = string.Format(navigation, this.Model.SignedModel.Username);
+            navigation = string.Format(navigation, ViewBag.Bag["username"]);
             string adminCategories = File.ReadAllText(Constants.ContentPath + Constants.AdminCategories);
             adminCategories  = String.Format(adminCategories, this.Model);
             string footer = File.ReadAllText(Constants.ContentPath + Constants.Footer);
