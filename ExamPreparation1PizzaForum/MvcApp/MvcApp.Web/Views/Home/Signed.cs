@@ -12,7 +12,7 @@
         public string Render()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(File.ReadAllText(Constants.ContantPath));
+            builder.Append(File.ReadAllText(Constants.ContentPath));
             return builder.ToString();
         }
     }

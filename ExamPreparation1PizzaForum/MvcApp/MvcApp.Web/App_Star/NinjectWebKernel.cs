@@ -44,6 +44,9 @@
 
             kernel.Bind(typeof(IRepository<User>)).To(typeof(DeletableEntityRepository<User>));
             kernel.Bind(typeof(IRepository<Session>)).To(typeof(DeletableEntityRepository<Session>));
+            kernel.Bind(typeof(IRepository<Category>)).To(typeof(DeletableEntityRepository<Category>));
+            kernel.Bind(typeof(IRepository<Topic>)).To(typeof(DeletableEntityRepository<Topic>));
+            kernel.Bind(typeof(IRepository<Reply>)).To(typeof(DeletableEntityRepository<Reply>));
             kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
         }

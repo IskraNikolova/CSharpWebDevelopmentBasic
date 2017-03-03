@@ -12,10 +12,11 @@
         private readonly IDeletableEntityRepository<User> users;
         private readonly IDeletableEntityRepository<Session> sessions;
 
-        public LoginServices()
+        public LoginServices(IDeletableEntityRepository<User> users, 
+            IDeletableEntityRepository<Session> sessions)
         {
-            this.users = new DeletableEntityRepository<User>(MvcAppContext.Create());
-            this.sessions = new DeletableEntityRepository<Session>(MvcAppContext.Create());
+            this.users = users;
+            this.sessions = sessions;
         }
 
         public bool IsLoginViewModelValid(LoginBindingModel model)

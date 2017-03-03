@@ -6,7 +6,7 @@
 
         public override string ToString()
         {
-            return $"<span class=\"navbar-text\">Hello, {this.Username}</span>";
+            return this.Username;
         }
     }
 }

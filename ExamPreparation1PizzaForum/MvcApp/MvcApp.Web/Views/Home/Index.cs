@@ -8,7 +8,7 @@
         public string Render()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(File.ReadAllText(Constants.ContantPath));
+            builder.Append(File.ReadAllText("../../Content/index.html"));
             return builder.ToString();
         }
     }

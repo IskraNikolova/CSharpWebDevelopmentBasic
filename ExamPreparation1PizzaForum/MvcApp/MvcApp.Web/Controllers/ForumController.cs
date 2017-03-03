@@ -11,14 +11,16 @@
     using SimpleMVC.Controllers;
     using SimpleMVC.Interfaces;
 
-    public class UsersController : Controller
+    public class ForumController : Controller
     {
         private readonly IDeletableEntityRepository<Session> sessions;
+        private readonly IDeletableEntityRepository<User> users;
         private readonly AuthenticationManager authenticationManger;
 
-        public UsersController()
+        public ForumController()
         {
             this.sessions = new DeletableEntityRepository<Session>(MvcAppContext.Create());
+            this.users = new DeletableEntityRepository<User>(MvcAppContext.Create());
             this.authenticationManger = new AuthenticationManager(this.sessions);
         }
 
@@ -27,7 +29,7 @@
         {
             if (this.authenticationManger.IsAuthenticated(session.Id))
             {
-                this.Redirect(response, "home/signed");
+                this.Redirect(response, "home/index");
                 return null;
             }
 
@@ -41,13 +43,13 @@
             var service = new RegisterServices();
             if (!service.IsRegisterModelValid(model))
             {
-                this.Redirect(response, "/users/register");
+                this.Redirect(response, "/forum/register");
             }
             else
             {
                 var user = service.GetUserOfRegisterBind(model);
                 service.RegisterUser(user);
-                this.Redirect(response, "/users/login");
+                this.Redirect(response, "/forum/login");
             }
 
             return null;
@@ -58,7 +60,7 @@
         {
             if (this.authenticationManger.IsAuthenticated(session.Id))
             {
-                this.Redirect(response, "home/signed");
+                this.Redirect(response, "home/index");
                 return null;
             }
 
@@ -70,18 +72,18 @@
                                     HttpSession session,
                                     HttpResponse response)
         {
-            var loginServices = new LoginServices();
+            var loginServices = new LoginServices(this.users, this.sessions);
 
             if (!loginServices.IsLoginViewModelValid(model))
             {
-                this.Redirect(response, "/users/login");
+                this.Redirect(response, "/forum/login");
             }
             else
             {
                 var logginUser = loginServices.GetUserOfLoginBind(model);
                 loginServices.LoginUser(logginUser, session);
 
-                this.Redirect(response, "/home/signed");
+                this.Redirect(response, "/home/index");
             }
 
             return null;
