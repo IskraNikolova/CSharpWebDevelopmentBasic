@@ -4,7 +4,7 @@
     {
         private static MvcAppContext context;
 
-        public MvcAppContext Context
+        public static MvcAppContext Context
         {
             get { return context ?? (context = new MvcAppContext()); }
         }

@@ -16,7 +16,7 @@ namespace MvcApp.Data
         }
         public static MvcAppContext Create()
         {
-            return new MvcAppContext();//TODO
+            return Data.Context;
         }
 
         public override int SaveChanges()

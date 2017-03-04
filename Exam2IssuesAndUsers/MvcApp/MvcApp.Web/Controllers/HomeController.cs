@@ -31,7 +31,7 @@
         {
             var service = new HomeIndexService(this.unit);
             var signedModel = new SignedViewModel();
-            if (!this.authenticationManager.IsAuthenticated(session.Id))
+            if (this.authenticationManager.IsAuthenticated(session.Id))
             {
                 var user = service.GetAutenticationUser(session);
                 signedModel.Username = user.Username;

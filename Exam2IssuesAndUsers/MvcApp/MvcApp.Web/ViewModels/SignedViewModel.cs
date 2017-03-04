@@ -2,6 +2,7 @@
 {
     using Data.Models;
     using Infrastucture.Mapping;
+
     public class SignedViewModel : IMapFrom<User>
     {
         public string Username { get; set; }

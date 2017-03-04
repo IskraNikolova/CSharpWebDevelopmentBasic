@@ -12,7 +12,7 @@
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(File.ReadAllText(Constants.ContentPath + "header.html"));
-            if (!string.IsNullOrEmpty(this.Model.Username))
+            if (string.IsNullOrEmpty(this.Model.Username))
             {
                 builder.Append(File.ReadAllText(Constants.ContentPath + "menu.html"));
             }
@@ -22,7 +22,7 @@
                                              this.Model.ToString()));
             }
                        
-            builder.Append(File.ReadAllText(Constants.ContentPath + "index.html"));
+            builder.Append(File.ReadAllText(Constants.ContentPath + "home.html"));
             builder.Append(File.ReadAllText(Constants.ContentPath + "footer.html"));
 
             return builder.ToString();
