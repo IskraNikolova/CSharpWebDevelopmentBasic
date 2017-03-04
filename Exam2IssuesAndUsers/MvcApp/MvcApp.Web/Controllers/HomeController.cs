@@ -1,10 +1,9 @@
 ﻿namespace MvcApp.Web.Controllers
 {
-    using System.Linq;
+    using System.IO;
     using Data;
-    using Data.Common.Repository;
-    using Data.Models;
     using Security;
+    using Services.Home;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
     using SimpleMVC.Controllers;
@@ -17,9 +16,9 @@
         private readonly UnitOfWork unit;
         private readonly AuthenticationManager authenticationManager;
 
-        public HomeController() 
+        public HomeController()
             : this(new UnitOfWork(), new AuthenticationManager())
-        {          
+        {
         }
 
         public HomeController(UnitOfWork unit, AuthenticationManager manager)
@@ -34,33 +33,29 @@
             return this.View();
         }
 
-
         [HttpGet]
-        public IActionResult<SignedViewModel> Signed(HttpSession session, HttpResponse response)
+        public IActionResult<SignedViewModel> SignedHome(HttpSession session, HttpResponse response)
         {
+
             if (!this.authenticationManager.IsAuthenticated(session.Id, this.unit.Sessions))
             {
                 this.Redirect(response, "/home/index");
             }
 
-            using (this.unit.Sessions)
+            var service = new HomeIndexService(this.unit);
+            var user = service.GetAutenticationUser(session);
+
+            if (user != null)
             {
-                var user = this.unit.Sessions
-                                   .All()
-                                   .FirstOrDefault(s => s.LoginId == session.Id)
-                                   .User;
-                if (user != null)
+                var viewModel = new SignedViewModel()
                 {
-                    var viewModel = new SignedViewModel()
-                    {
-                        Username = user.Username
-                    };
+                    Username = user.Username
+                };
 
-                    return this.View(viewModel);
-                }
-
-                return null;
+                return this.View(viewModel);
             }
+
+            return null;
         }
     }
 }

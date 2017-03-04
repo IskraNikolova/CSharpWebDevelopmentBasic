@@ -1,12 +1,14 @@
 ﻿namespace MvcApp.Web.ViewModels
 {
-    public class SignedViewModel
+    using Data.Models;
+    using Infrastucture.Mapping;
+    public class SignedViewModel : IMapFrom<User>
     {
         public string Username { get; set; }
 
         public override string ToString()
         {
-            return $"<span class=\"navbar-text\">Hello, {this.Username}</span>";
+            return $"<li><a href=\"#\">Hello, {this.Username}</a></li>";
         }
     }
 }

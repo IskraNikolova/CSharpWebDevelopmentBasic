@@ -90,8 +90,9 @@
     <Compile Include="BindingModels\LoginBindingModel.cs" />
     <Compile Include="BindingModels\RegisterBindingModel.cs" />
     <Compile Include="Security\AuthenticationManager.cs" />
-    <Compile Include="Services\LoginServices.cs" />
-    <Compile Include="Services\RegisterServices.cs" />
+    <Compile Include="Services\Home\HomeIndexService.cs" />
+    <Compile Include="Services\User\LoginServices.cs" />
+    <Compile Include="Services\User\RegisterServices.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

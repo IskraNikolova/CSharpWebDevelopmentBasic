@@ -1,5 +1,7 @@
 ﻿namespace MvcApp.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using BindingModels;
     using Data;
     using Security;
@@ -8,6 +10,8 @@
     using SimpleMVC.Attributes.Methods;
     using SimpleMVC.Controllers;
     using SimpleMVC.Interfaces;
+    using SimpleMVC.Interfaces.Generic;
+    using ViewModels;
 
     public class UsersController : Controller
     {
@@ -28,32 +32,25 @@
         }
 
         [HttpGet]
-        public IActionResult Register(HttpResponse response, HttpSession session)
+        public IActionResult<HashSet<RegisterValidationModel>> Register(HttpResponse response, HttpSession session)
         {
-            if (this.authenticationManger.IsAuthenticated(session.Id, this.unit.Sessions))
-            {
-                this.Redirect(response, "home/index");
-                return null;
-            }
-
-            return this.View();
+            return this.View(new HashSet<RegisterValidationModel>());
         }
 
 
         [HttpPost]
-        public void Register(RegisterBindingModel model, HttpResponse response)
+        public IActionResult<HashSet<RegisterValidationModel>> Register(RegisterBindingModel model, HttpResponse response)
         {
             var service = new RegisterServices(this.unit);
-            if (!service.IsRegisterModelValid(model))
+            var errors = service.RegisterModelValidator(model);
+            if (errors.Any())
             {
-                this.Redirect(response, "/users/register");
+                return this.View(errors);
             }
-            else
-            {
-                var user = service.GetUserOfRegisterBind(model);
-                service.RegisterUser(user);
-                this.Redirect(response, "/home/index");//todo"users/login"
-            }
+
+            service.RegisterUser(service.GetUserOfRegisterBind(model));
+            this.Redirect(response, "users/login");
+            return this.View(new HashSet<RegisterValidationModel>());
         }
 
         [HttpGet]
