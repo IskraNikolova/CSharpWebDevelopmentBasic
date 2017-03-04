@@ -12,7 +12,6 @@
         {
             var autoMapperConfig = new AutoMapperConfig(Assembly.GetExecutingAssembly());
             autoMapperConfig.Execute();
-            
             HttpServer server = new HttpServer(8081, RouteConfig.Routes);
             MvcEngine.Run(server, "MvcApp.Web");
         }
