@@ -1,16 +1,25 @@
 ﻿namespace MvcApp.Web.Security
 {
     using System.Linq;
+    using Data;
     using Data.Common.Repository;
     using Data.Models;
     using SimpleHttpServer.Models;
     using SimpleHttpServer.Utilities;
+    using Login = Data.Models.Login;
 
     public class AuthenticationManager
     {
-        public bool IsAuthenticated(string sessionId, IDeletableEntityRepository<Login> sessions)
+        private UnitOfWork unit;
+
+        public AuthenticationManager(UnitOfWork unit)
         {
-            bool isAuthenticated = sessions.All()
+            this.unit = unit;
+        }
+
+        public bool IsAuthenticated(string sessionId)
+        {
+            bool isAuthenticated = this.unit.Sessions.All()
                 .Any(s => s.LoginId == sessionId && s.IsActive);
 
             return isAuthenticated;
@@ -26,15 +35,15 @@
             return user;
         }
 
-        public void Logout(HttpResponse response, string sessionId, IDeletableEntityRepository<Login> sessions )
+        public void Logout(HttpResponse response, string sessionId)
         {
-            Login loginEntity = sessions
+            Login loginEntity = this.unit.Sessions
                 .All()
                 .FirstOrDefault(s => s.LoginId == sessionId);
 
             loginEntity.IsActive = false;
 
-            sessions.SaveChanges();
+            this.unit.Sessions.SaveChanges();
 
             var session = SessionCreator.Create();
             var sessionCookie = new Cookie("sessionId", session.Id + "; HttpOnly; path=/");

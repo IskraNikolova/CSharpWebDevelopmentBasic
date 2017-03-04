@@ -19,16 +19,14 @@
         private readonly AuthenticationManager authenticationManger;
 
         public UsersController() 
-            : this(new UnitOfWork(), 
-                   new AuthenticationManager())
+            : this(new UnitOfWork())
         {           
         }
 
-        public UsersController(UnitOfWork unit,
-            AuthenticationManager manager)
+        public UsersController(UnitOfWork unit)
         {
             this.unit = unit;
-            this.authenticationManger = manager;
+            this.authenticationManger = new AuthenticationManager(unit);
         }
 
         [HttpGet]
@@ -56,9 +54,9 @@
         [HttpGet]
         public IActionResult Login(HttpResponse response, HttpSession session)
         {
-            if (this.authenticationManger.IsAuthenticated(session.Id, this.unit.Sessions))
+            if (this.authenticationManger.IsAuthenticated(session.Id))
             {
-                this.Redirect(response, "home/signed");
+                this.Redirect(response, "home/index");
                 return null;
             }
 
@@ -88,7 +86,7 @@
         [HttpGet]
         public void Logout(HttpSession session, HttpResponse response)
         {
-            this.authenticationManger.Logout(response, session.Id, this.unit.Sessions);
+            this.authenticationManger.Logout(response, session.Id);
 
             this.Redirect(response, "/home/index");
         }

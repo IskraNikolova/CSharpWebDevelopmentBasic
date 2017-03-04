@@ -1,6 +1,5 @@
 ﻿namespace MvcApp.Web.Controllers
 {
-    using System.IO;
     using Data;
     using Security;
     using Services.Home;
@@ -17,45 +16,27 @@
         private readonly AuthenticationManager authenticationManager;
 
         public HomeController()
-            : this(new UnitOfWork(), new AuthenticationManager())
+            : this(new UnitOfWork())
         {
         }
 
-        public HomeController(UnitOfWork unit, AuthenticationManager manager)
+        public HomeController(UnitOfWork unit)
         {
             this.unit = unit;
-            this.authenticationManager = manager;
+            this.authenticationManager = new AuthenticationManager(unit);
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult<SignedViewModel> Index(HttpSession session, HttpResponse response)
         {
-            return this.View();
-        }
-
-        [HttpGet]
-        public IActionResult<SignedViewModel> SignedHome(HttpSession session, HttpResponse response)
-        {
-
-            if (!this.authenticationManager.IsAuthenticated(session.Id, this.unit.Sessions))
-            {
-                this.Redirect(response, "/home/index");
-            }
-
             var service = new HomeIndexService(this.unit);
-            var user = service.GetAutenticationUser(session);
-
-            if (user != null)
+            var signedModel = new SignedViewModel();
+            if (!this.authenticationManager.IsAuthenticated(session.Id))
             {
-                var viewModel = new SignedViewModel()
-                {
-                    Username = user.Username
-                };
-
-                return this.View(viewModel);
+                var user = service.GetAutenticationUser(session);
+                signedModel.Username = user.Username;
             }
-
-            return null;
+            return this.View(signedModel);
         }
     }
 }
