@@ -93,8 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Content\bootstrap\css\bootstrap-theme.css.map" />
-    <None Include="Content\bootstrap\css\bootstrap-theme.min.css.map" />
+    <None Include="Content\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="Content\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="Content\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="Content\bootstrap\css\bootstrap-reboot.min.css.map" />
     <None Include="Content\bootstrap\css\bootstrap.css.map" />
     <None Include="Content\bootstrap\css\bootstrap.min.css.map" />
     <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -104,8 +106,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\add-game.html" />
+    <Content Include="Content\admin-games.html" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -114,8 +120,17 @@
     <Content Include="Content\bootstrap\js\npm.js" />
     <Content Include="Content\css\carousel.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\delete-game.html" />
+    <Content Include="Content\edit-game.html" />
+    <Content Include="Content\footer.html" />
+    <Content Include="Content\game-details.html" />
+    <Content Include="Content\header.html" />
+    <Content Include="Content\home.html" />
     <Content Include="Content\index.html" />
-    <Content Include="Content\jquery\jquery-3.1.1.js" />
+    <Content Include="Content\jquery\jquery-3.1.1.min.js" />
+    <Content Include="Content\login.html" />
+    <Content Include="Content\nav-logged.html" />
+    <Content Include="Content\nav-not-logged.html" />
     <Content Include="Content\register.html" />
   </ItemGroup>
   <ItemGroup>
